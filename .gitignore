@@ -5,4 +5,5 @@ coverage/
 .coveralls.yml
 .DS_Store
 .idea/
+.tmp/
 *.iml
