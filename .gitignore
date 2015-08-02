@@ -6,4 +6,6 @@ coverage/
 .DS_Store
 .idea/
 .tmp/
+dist/
 *.iml
+*.js~
