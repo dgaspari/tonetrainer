@@ -9,15 +9,14 @@ p
 a(href='/') back to index page
 
 p
-  This page has a wav file recorder. Based on:
-  
-a(href='http://typedarray.org/from-microphone-to-wav-with-getusermedia-and-web-audio/') this article
+  This is a simple audio recorder:
 
-and here is an 
+button(id="recordAudio").
+  Record
 
-a(href='http://typedarray.org/wp-content/projects/WebAudioRecorder/') example implementation
+button(id="stopRecordingAudio").
+  Stop
 
-p 
-  Click Allow, then press R for recording, once done, press S to stop and grab the WAV file.
+ul(id="recordingList")
 
-p(id='output')
+
