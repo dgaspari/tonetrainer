@@ -39,6 +39,17 @@ var TestView = Backbone.View.extend({
       self.addDownloadLink();
       self.recorder && self.recorder.clear();
     });
+    $('.testGetFreq').click(function() {
+      var thisLink = $(this);
+      thisLink.attr('disabled',true);
+      console.log('obtaining vocal freq map from example.wav...');
+      $.ajax('test/getfreq')
+      .done(function(data) {
+        console.log('data obtained from rpc call:');
+        console.log(data);
+        thisLink.attr('disabled',false);
+      });
+    });
   },
 
   addDownloadLink: function() {

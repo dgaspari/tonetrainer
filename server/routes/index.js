@@ -5,6 +5,7 @@
 'use strict';
 
 var indexController = require('../controllers/index');
+var testController = require('../controllers/test');
 var path = require('path');
 var fs = require('fs');
 
@@ -21,7 +22,8 @@ var routes = function(app) {
 
   // Home
   app.get('/', indexController.index);
-
+  // Test
+  app.get('/test/getfreq', testController.test);
 };
 
 module.exports = routes;
