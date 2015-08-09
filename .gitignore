@@ -9,3 +9,4 @@ coverage/
 dist/
 *.iml
 *.js~
+scratch/
