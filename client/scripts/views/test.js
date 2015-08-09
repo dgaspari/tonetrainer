@@ -51,7 +51,7 @@ var TestView = Backbone.View.extend({
     // TODO: add logic to deal when currentidx is not -1 (from JSSSoundRecorder impl of handleWAV)
     var url = URL.createObjectURL(blob);
     var fileTimeStamp = new Date().toISOString() + '.wav';
-    listRef.append('<li><a class="audio-download-link" href="' + url + '" download="' + fileTimeStamp + '">Download audio sample</a></li>');
+    listRef.append('<li><a class="audio-download-link" data-bypass=""  href="' + url + '" download="' + fileTimeStamp + '">Download audio sample</a></li>');
   },
 
   obtainMediaInfo: function() {
