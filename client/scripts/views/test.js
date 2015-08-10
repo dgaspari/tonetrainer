@@ -56,11 +56,17 @@ var TestView = Backbone.View.extend({
     this.recorder && this.recorder.exportWAV(this.handleWAV);
   },
 
-  handleWAV: function(blob) {
+  handleWAV: function(blobdata) {
+    console.log('passing blob to python module...');
+    $.post('test/sendfreq', { audiodata: 'blobdata' })
+    .done(function(data) {
+      console.log('call made');
+      console.log(data);
+    });
     console.log('adding link to wav file...');
     var listRef = $('#recordingList');
     // TODO: add logic to deal when currentidx is not -1 (from JSSSoundRecorder impl of handleWAV)
-    var url = URL.createObjectURL(blob);
+    var url = URL.createObjectURL(blobdata);
     var fileTimeStamp = new Date().toISOString() + '.wav';
     listRef.append('<li><a class="audio-download-link" data-bypass=""  href="' + url + '" download="' + fileTimeStamp + '">Download audio sample</a></li>');
   },

@@ -6,6 +6,7 @@
 
 var indexController = require('../controllers/index');
 var testController = require('../controllers/test');
+var sendFrequencyController = require('../controllers/sendFrequency');
 var path = require('path');
 var fs = require('fs');
 
@@ -24,6 +25,7 @@ var routes = function(app) {
   app.get('/', indexController.index);
   // Test
   app.get('/test/getfreq', testController.test);
+  app.post('/test/sendfreq', sendFrequencyController.sendFrequency);
 };
 
 module.exports = routes;
