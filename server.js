@@ -9,8 +9,18 @@ var express = require('express');
 // Add coloring for console output
 require('colors');
 
+// busboy drop-in for express (used to parse files)
+var bb = require('express-busboy');
+
 // Create Express server.
 var app = express();
+
+//TODO: look into security / maintenance issues with allowing uploads (need to clear out tmp dir periodically, at minimum)
+//use busboy drop-in
+bb.extend(app, {
+    upload: true,
+    path: '/home/dgaspari/dev/thesis/web/tonetrainer/scratch/tmpfiles'
+});
 
 // Express configuration
 require('./server/config/express')(app, express);

@@ -58,10 +58,18 @@ var TestView = Backbone.View.extend({
 
   handleWAV: function(blobdata) {
     console.log('passing blob to python module...');
-    $.post('test/sendfreq', { audiodata: 'blobdata' })
-    .done(function(data) {
-      console.log('call made');
-      console.log(data);
+    var uploadData = new FormData();
+    uploadData.append('audiodata', blobdata);
+    $.ajax({
+      url: 'test/sendfreq',
+      type: 'POST',
+      data: uploadData,
+      contentType: false,
+      processData: false,
+      success: function(data) {
+        console.log('rpc call returned:');
+        console.log(data);
+      }
     });
     console.log('adding link to wav file...');
     var listRef = $('#recordingList');
