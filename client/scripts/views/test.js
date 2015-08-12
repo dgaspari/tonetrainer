@@ -66,9 +66,18 @@ var TestView = Backbone.View.extend({
       data: uploadData,
       contentType: false,
       processData: false,
-      success: function(data) {
+      success: function(results) {
         console.log('rpc call returned:');
-        console.log(data);
+        results.freqmap.unshift('voice frequency (hz)');
+        console.log(results.freqmap);
+        var chart = c3.generate({
+          bindto: '#chart',
+          data: {
+            columns: [
+              results.freqmap
+            ]
+          }
+        });
       }
     });
     console.log('adding link to wav file...');

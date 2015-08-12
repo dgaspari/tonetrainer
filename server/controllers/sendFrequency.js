@@ -19,7 +19,7 @@ var sendFrequencyController = function(req, res) {
   //we've finished.
   client.invoke('raptforfile', req.files.audiodata.file, function(error, rpcRes, more) {
     freqResults = rpcRes;
-    res.json({'vocal-frequency': freqResults});
+    res.json({'freqmap': freqResults});
   });
 };
 
