@@ -72,3 +72,32 @@
   color: #000;
   padding: 0.5em 0;
 }
+
+// 3rd party css for SpectrogramJS
+
+canvas, svg {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.spectrogram {
+  position: relative;
+  margin-top: 320px;
+}
+
+.axis {
+  font: 14px sans-serif;
+}
+
+.axis path,
+.axis line {
+  fill: none;
+}
+
+.axis line {
+  shape-rendering: crispEdges;
+  stroke: #444;
+  stroke-width: 1.0px;
+  stroke-dasharray: 2,4;
+}

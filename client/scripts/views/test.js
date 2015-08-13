@@ -39,17 +39,6 @@ var TestView = Backbone.View.extend({
       self.addDownloadLink();
       self.recorder && self.recorder.clear();
     });
-    $('.testGetFreq').click(function() {
-      var thisLink = $(this);
-      thisLink.attr('disabled',true);
-      console.log('obtaining vocal freq map from example.wav...');
-      $.ajax('test/getfreq')
-      .done(function(data) {
-        console.log('data obtained from rpc call:');
-        console.log(data);
-        thisLink.attr('disabled',false);
-      });
-    });
   },
 
   addDownloadLink: function() {
@@ -86,6 +75,7 @@ var TestView = Backbone.View.extend({
     var url = URL.createObjectURL(blobdata);
     var fileTimeStamp = new Date().toISOString() + '.wav';
     listRef.append('<li><a class="audio-download-link" data-bypass=""  href="' + url + '" download="' + fileTimeStamp + '">Download audio sample</a></li>');
+    var sample = new Spectrogram(url, "#vis", {width:500, height:200, maxFrequency:8000});
   },
 
   obtainMediaInfo: function() {
