@@ -76,6 +76,7 @@ var TestView = Backbone.View.extend({
     var fileTimeStamp = new Date().toISOString() + '.wav';
     listRef.append('<li><a class="audio-download-link" data-bypass=""  href="' + url + '" download="' + fileTimeStamp + '">Download audio sample</a></li>');
     var sample = new Spectrogram(url, "#vis", {width:500, height:200, maxFrequency:8000});
+    setupAltSpectrogram(url);
   },
 
   obtainMediaInfo: function() {
