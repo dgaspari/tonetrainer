@@ -9,7 +9,8 @@
     "jquery": "~1.11.1",
     "backbone": "~1.1.2",
     "jade": "~1.5.0",
-    "c3": "~0.4.10"
+    "c3": "~0.4.10",
+    "chroma-js": "~1.1.1"
   },
   "devDependencies": {}
 }
