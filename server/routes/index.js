@@ -24,6 +24,7 @@ var routes = function(app) {
   // Home
   app.get('/', indexController.index);
   // Test
+  app.get('/test', indexController.index);
   app.get('/test/getfreq', testController.test);
   app.post('/test/sendfreq', sendFrequencyController.sendFrequency);
 };
