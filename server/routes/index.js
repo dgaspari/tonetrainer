@@ -23,6 +23,8 @@ var routes = function(app) {
 
   // Home
   app.get('/', indexController.index);
+  // Recorder
+  app.get('/recorder', indexController.index);
   // Test
   app.get('/test', indexController.index);
   app.get('/test/getfreq', testController.test);

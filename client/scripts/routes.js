@@ -1,12 +1,14 @@
 'use strict';
 var IndexView = require('./views/index');
 var TestView = require('./views/test');
+var RecorderView = require('./views/recorder');
 
 var Router = Backbone.Router.extend({
 
   routes: {
     '': 'index',
-    'test': 'test'
+    'test': 'test',
+    'recorder': 'recorder'
   },
   index: function() {
     // Render index page
@@ -14,6 +16,9 @@ var Router = Backbone.Router.extend({
   },
   test: function() {
     new TestView();
+  },
+  recorder: function() {
+    new RecorderView();
   }
 });
 
