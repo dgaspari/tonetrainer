@@ -25,6 +25,8 @@ var routes = function(app) {
   app.get('/', indexController.index);
   // Recorder
   app.get('/recorder', indexController.index);
+  app.get('/recorder_start', indexController.index);
+  app.get('/recorder_end', indexController.index);
   // Test
   app.get('/test', indexController.index);
   app.get('/test/getfreq', testController.test);
