@@ -7,6 +7,7 @@
 var indexController = require('../controllers/index');
 var testController = require('../controllers/test');
 var sendFrequencyController = require('../controllers/sendFrequency');
+var recorderController = require('../controllers/recorder');
 var path = require('path');
 var fs = require('fs');
 
@@ -27,6 +28,7 @@ var routes = function(app) {
   app.get('/recorder', indexController.index);
   app.get('/recorder_start', indexController.index);
   app.get('/recorder_end', indexController.index);
+  app.post('/recorder/save', recorderController.save);
   // Test
   app.get('/test', indexController.index);
   app.get('/test/getfreq', testController.test);
