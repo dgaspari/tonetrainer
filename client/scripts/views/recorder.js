@@ -32,7 +32,7 @@ var RecorderView = Backbone.View.extend({
       //post upload HERE: 
       var uploadData = new FormData();
       //TODO: record with filename param of stop recording method - that tells what the file is
-      uploadData.append('newsample', blobdata)
+      uploadData.append('newsample_' + filename, blobdata)
       $.ajax({
         url: 'recorder/save',
         type: 'POST',
@@ -76,7 +76,9 @@ var RecorderView = Backbone.View.extend({
 
   beginRecording: function() {
     var self = this;
-    var fileTimeStamp = new Date().toISOString() + '.wav';
+    var timeStamp = new Date().toISOString();
+    //var fileTimeStamp = new Date().toISOString() + '.wav';
+    var fileName = 'suan_1_' + timeStamp;
     //change intro instructions and begin process of recording:
     $('#intro_msg').html('Now that you have allowed access to your microphone we can begin recording in 5 seconds...');
     setTimeout(function() {
@@ -84,7 +86,7 @@ var RecorderView = Backbone.View.extend({
       self.startRecording();
       setTimeout(function() {
         $('#intro_msg').html('waiting 5 seconds and then recording the next sample...');
-        self.stopRecording(fileTimeStamp);
+        self.stopRecording(fileName);
       }, 3000);
     }, 5000);
   }
