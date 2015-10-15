@@ -32,9 +32,9 @@ var RecorderView = Backbone.View.extend({
       //post upload HERE: 
       var uploadData = new FormData();
       //TODO: record with filename param of stop recording method - that tells what the file is
-      uploadData.append('newsample_' + filename, blobdata)
+      uploadData.append('sample', blobdata)
       $.ajax({
-        url: 'recorder/save',
+        url: 'audio/upload', //'recorder/save',
         type: 'POST',
         data: uploadData,
         contentType: false,

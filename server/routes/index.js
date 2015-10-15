@@ -11,6 +11,17 @@ var recorderController = require('../controllers/recorder');
 var path = require('path');
 var fs = require('fs');
 
+var multer = require('multer');
+var aStorage = multer.diskStorage({
+  destination: function(req, file, cb) {
+    cb(null, './scratch/audiofiles');
+  },
+  filename: function(req, file, cb) {
+    cb(null, 'audiosample01_' + Date.now());
+  }
+});
+var upload = multer({ storage: aStorage });
+
 var routes = function(app) {
 
   // Dynamically load all routes
@@ -28,7 +39,13 @@ var routes = function(app) {
   app.get('/recorder', indexController.index);
   app.get('/recorder_start', indexController.index);
   app.get('/recorder_end', indexController.index);
-  app.post('/recorder/save', recorderController.save);
+  // app.post('/recorder/save', recorderController.save);
+
+// Setup multer file save location:
+  app.post('/audio/upload', upload.single('sample'), function(req, res, next) {
+    res.status(204).end();
+  });
+
   // Test
   app.get('/test', indexController.index);
   app.get('/test/getfreq', testController.test);
