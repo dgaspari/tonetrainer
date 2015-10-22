@@ -67,8 +67,9 @@ var Recorder = function(source, cfg){
   }
 
   worker.onmessage = function(e){
-    var blob = e.data;
-    currCallback(blob);
+    var ted = e.data;
+    //var blob = e.data;
+    currCallback(ted);
   }
 
   source.connect(this.node);

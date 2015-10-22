@@ -12,12 +12,20 @@ var path = require('path');
 var fs = require('fs');
 
 var multer = require('multer');
+
 var aStorage = multer.diskStorage({
   destination: function(req, file, cb) {
     cb(null, './scratch/audiofiles');
   },
   filename: function(req, file, cb) {
-    cb(null, 'audiosample01_' + Date.now());
+    var aNow = new Date();
+    var aDateString = aNow.getFullYear() + "-" + (aNow.getMonth() + 1) + "-" + aNow.getDate();
+    aDateString += "_" + aNow.getHours() + "-" + aNow.getMinutes() + "-" + aNow.getSeconds();
+    var aFileName = 'audiosample01_' + aDateString;
+    if(file && file.originalname) {
+      aFileName = file.originalname + '_' + aDateString;
+    }
+    cb(null, aFileName);
   }
 });
 var upload = multer({ storage: aStorage });

@@ -38,7 +38,6 @@ function exportWAV(type){
   var buffer = mergeBuffers(recBuffers, recLength);
   var dataview = encodeWAV(buffer);
   var audioBlob = new Blob([dataview], { type: type });
-
   this.postMessage(audioBlob);
 }
 
