@@ -76,24 +76,32 @@ var RecorderView = Backbone.View.extend({
 
   beginRecording: function() {
     var self = this;
+    var charList = [{character: '酸', filename: 'suan01' }, { character: '酸', filename: 'suan02'}];
     //change intro instructions and begin process of recording:
     $('#intro_msg').html('Now that you have allowed access to your microphone we can begin recording in 5 seconds...');
     setTimeout(function() {
-      $('#intro_msg').html('pronounce: 酸');
+      self.recordSample(charList);
+    }, 5000);
+  },
+
+  recordSample: function(charList) {
+    // pop top item if not empty, record, then recursively pass in list
+    var self = this;
+    var currentItem = charList.shift();
+    if(currentItem) {
+      $('#intro_msg').html('Pronounce: ' + currentItem.character);
       self.startRecording();
       setTimeout(function() {
-        $('#intro_msg').html('waiting 5 seconds and then recording the next sample...');
-        self.stopRecording('suan01');
-        setTimeout(function() {
-          $('#intro_msg').html('pronounce: 酸');
-          self.startRecording();
-          setTimeout(function() {
-            $('#intro_msg').html('waiting 5 seconds and then recording the next sample...');
-            self.stopRecording('suan02');
-          }, 3000);
-        }, 5000);
+        self.stopRecording(currentItem.filename);
+        if(charList.length == 0) {
+          $('#intro_msg').html('...');
+        }
+        else {
+          $('#intro_msg').html('waiting 5 seconds and then recording the next sample...');
+          setTimeout(function() { self.recordSample(charList); }, 5000);
+        }
       }, 3000);
-    }, 5000);
+    }
   }
 
 });
