@@ -11,8 +11,10 @@ var RecorderView = Backbone.View.extend({
   events: {},
 
   charList: [
-    {character: '酸', filename: 'suan01' }, 
-    { character: '酸', filename: 'suan02'}
+    { character: '新', filename: 'xin01', pinyin: 'xīn' },
+    { character: '新', filename: 'xin02', pinyin: 'xīn' },
+    { character: '酸', filename: 'suan01', pinyin: 'suān' }, 
+    { character: '酸', filename: 'suan02', pinyin: 'suān' }
   ],
 
   initialize: function() {
