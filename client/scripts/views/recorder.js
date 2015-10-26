@@ -10,6 +10,11 @@ var RecorderView = Backbone.View.extend({
 
   events: {},
 
+  charList: [
+    {character: '酸', filename: 'suan01' }, 
+    { character: '酸', filename: 'suan02'}
+  ],
+
   initialize: function() {
     this.render();
     this.obtainMediaInfo();
@@ -76,29 +81,28 @@ var RecorderView = Backbone.View.extend({
 
   beginRecording: function() {
     var self = this;
-    var charList = [{character: '酸', filename: 'suan01' }, { character: '酸', filename: 'suan02'}];
     //change intro instructions and begin process of recording:
     $('#intro_msg').html('Now that you have allowed access to your microphone we can begin recording in 5 seconds...');
     setTimeout(function() {
-      self.recordSample(charList);
+      self.recordSample(self.charList);
     }, 5000);
   },
 
-  recordSample: function(charList) {
+  recordSample: function(currentCharList) {
     // pop top item if not empty, record, then recursively pass in list
     var self = this;
-    var currentItem = charList.shift();
+    var currentItem = currentCharList.shift();
     if(currentItem) {
       $('#intro_msg').html('Pronounce: ' + currentItem.character);
       self.startRecording();
       setTimeout(function() {
         self.stopRecording(currentItem.filename);
-        if(charList.length == 0) {
+        if(currentCharList.length == 0) {
           $('#intro_msg').html('...');
         }
         else {
           $('#intro_msg').html('waiting 5 seconds and then recording the next sample...');
-          setTimeout(function() { self.recordSample(charList); }, 5000);
+          setTimeout(function() { self.recordSample(currentCharList); }, 5000);
         }
       }, 3000);
     }
