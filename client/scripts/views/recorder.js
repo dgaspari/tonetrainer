@@ -64,8 +64,9 @@ var RecorderView = Backbone.View.extend({
     { character: '重要', filename: 'zhongyao01', pinyin: 'zhòngyào' },
     { character: '重要', filename: 'zhongyao02', pinyin: 'zhòngyào' },
     { character: '便宜', filename: 'bianyi01', pinyin: 'biànyí' },
-    { character: '便宜', filename: 'bianyi02', pinyin: 'biànyí' }
-    // { character: '', filename: '', pinyin: '' },
+    { character: '便宜', filename: 'bianyi02', pinyin: 'biànyí' },
+    { character: '漂亮', filename: 'piaoliang01', pinyin: 'piàoliang' },
+    { character: '漂亮', filename: 'piaoliang02', pinyin: 'piàoliang' }
   ],
 
   initialize: function() {
