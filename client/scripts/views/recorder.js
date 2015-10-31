@@ -136,7 +136,10 @@ var RecorderView = Backbone.View.extend({
   beginRecording: function() {
     var self = this;
     //change intro instructions and begin process of recording:
-    $('#intro_msg').html('Now that you have allowed access to your microphone we can begin recording in 5 seconds...');
+    $('#intro_msg').html("Now that you've allowed access to your microphone we'll start recording in 5 seconds, starting with word below:");
+    var firstItem = self.charList[0];
+    $('#char_display').html(firstItem.character);
+    $('#pinyin_display').html(firstItem.pinyin);
     setTimeout(function() {
       self.recordSample(self.charList);
     }, 5000);
@@ -147,15 +150,22 @@ var RecorderView = Backbone.View.extend({
     var self = this;
     var currentItem = currentCharList.shift();
     if(currentItem) {
-      $('#intro_msg').html('Pronounce: ' + currentItem.character);
+      $('#intro_msg').html('Recording - pronounce: ');
+      $('#char_display').html(currentItem.character);
+      $('#pinyin_display').html(currentItem.pinyin);
       self.startRecording();
       setTimeout(function() {
         self.stopRecording(currentItem.filename);
         if(currentCharList.length == 0) {
-          $('#intro_msg').html('...');
+          $('#intro_msg').html('Recording complete');
+          $('#char_display').html();
+          $('#pinyin_display').html();
         }
         else {
-          $('#intro_msg').html('waiting 5 seconds and then recording the next sample...');
+          var nextItem = currentCharList[0];
+          $('#intro_msg').html('Paused - waiting about 3 seconds and then recording the word below:');
+          $('#char_display').html(nextItem.character);
+          $('#pinyin_display').html(nextItem.pinyin);
           setTimeout(function() { self.recordSample(currentCharList); }, 5000);
         }
       }, 3000);
