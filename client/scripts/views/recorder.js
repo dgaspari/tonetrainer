@@ -72,11 +72,26 @@ var RecorderView = Backbone.View.extend({
   initialize: function() {
     this.render();
     this.obtainMediaInfo();
+    this.setEvents();
   },
 
   render: function() {
     this.$el.html(this.template);
     return this;
+  },
+
+  setEvents: function() {
+    $('#show_pinyin_link').click(function(e) {
+      e.preventDefault();
+      var aDisplay = $('#pinyin_display');
+      if(aDisplay.is(':visible')) {
+        aDisplay.hide();
+      }
+      else {
+        aDisplay.show();
+      }
+      return false;
+    });
   },
 
   startRecording: function() {
