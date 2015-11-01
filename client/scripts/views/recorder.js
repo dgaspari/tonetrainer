@@ -133,6 +133,10 @@ var RecorderView = Backbone.View.extend({
     self.beginRecording();
   },
 
+  isOnRecorderPage: function() {
+    return $('#end_link').length;
+  },
+
   beginRecording: function() {
     var self = this;
     //change intro instructions and begin process of recording:
@@ -149,9 +153,10 @@ var RecorderView = Backbone.View.extend({
     // pop top item if not empty, record, then recursively pass in list
     var self = this;
     var currentItem = currentCharList.shift();
-    if(currentItem) {
-      $('#intro_msg').html('Recording - pronounce: ');
+    if(currentItem && self.isOnRecorderPage()) {
+      $('#intro_msg').html('Recording - pronounce the word below: ');
       $('#char_display').html(currentItem.character);
+      $('#char_display').addClass('recording');
       $('#pinyin_display').html(currentItem.pinyin);
       self.startRecording();
       setTimeout(function() {
@@ -164,6 +169,7 @@ var RecorderView = Backbone.View.extend({
         else {
           var nextItem = currentCharList[0];
           $('#intro_msg').html('Paused - waiting about 3 seconds and then recording the word below:');
+          $('#char_display').removeClass('recording');
           $('#char_display').html(nextItem.character);
           $('#pinyin_display').html(nextItem.pinyin);
           setTimeout(function() { self.recordSample(currentCharList); }, 5000);

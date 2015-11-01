@@ -12,11 +12,17 @@
 }
 
 .recorder-character {
-    font-size: 7em;
+    text-align: center;
+    font-size: 6em;
 }
 
 .recorder-pinyin {
+    text-align: center;
     font-size: 2em;
+}
+
+.recording {
+    border: solid red 3px;
 }
 
 // Box sizing partial styles:
