@@ -25,6 +25,7 @@ var aStorage = multer.diskStorage({
     if(file && file.originalname) {
       aFileName = file.originalname + '_' + aDateString;
     }
+    aFileName += '.wav';
     cb(null, aFileName);
   }
 });
