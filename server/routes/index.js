@@ -20,7 +20,7 @@ var aStorage = multer.diskStorage({
   filename: function(req, file, cb) {
     var aNow = new Date();
     var aDateString = aNow.getFullYear() + "-" + (aNow.getMonth() + 1) + "-" + aNow.getDate();
-    aDateString += "_" + aNow.getHours() + ":" + aNow.getMinutes() + ":" + aNow.getSeconds();
+    aDateString += "_" + aNow.getHours() + "-" + aNow.getMinutes() + "-" + aNow.getSeconds();
     var aFileName = 'audiosample01_' + aDateString;
     if(file && file.originalname) {
       aFileName = file.originalname + '_' + aDateString;
