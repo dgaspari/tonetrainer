@@ -31,6 +31,8 @@ var aStorage = multer.diskStorage({
 });
 var upload = multer({ storage: aStorage });
 
+var testUpload = multer({ dest: '/home/dgaspari/dev/thesis/web/tonetrainer/scratch/tmpfiles/' });
+
 var routes = function(app) {
 
   // Dynamically load all routes
@@ -44,6 +46,9 @@ var routes = function(app) {
 
   // Home
   app.get('/', indexController.index);
+  // Main app
+  app.get('/main', indexController.index);
+  app.get('/main_app', indexController.index);
   // Recorder
   app.get('/recorder', indexController.index);
   app.get('/recorder_start', indexController.index);
@@ -58,7 +63,9 @@ var routes = function(app) {
   // Test
   app.get('/test', indexController.index);
   app.get('/test/getfreq', testController.test);
-  app.post('/test/sendfreq', sendFrequencyController.sendFrequency);
+  app.post('/test/sendfreq', testUpload.single('audiodata'), function(req, res, next) {
+    sendFrequencyController.sendFrequency(req, res);
+  });
 };
 
 module.exports = routes;
