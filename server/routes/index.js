@@ -5,6 +5,7 @@
 'use strict';
 
 var indexController = require('../controllers/index');
+var mainController = require('../controllers/main'); 
 var testController = require('../controllers/test');
 var sendFrequencyController = require('../controllers/sendFrequency');
 var recorderController = require('../controllers/recorder');
@@ -49,6 +50,7 @@ var routes = function(app) {
   // Main app
   app.get('/main', indexController.index);
   app.get('/main_app', indexController.index);
+  app.get('/main/getsample', mainController.getsample);
   // Recorder
   app.get('/recorder', indexController.index);
   app.get('/recorder_start', indexController.index);

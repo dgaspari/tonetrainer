@@ -19,3 +19,11 @@ This web app uses ZeroRPC to invoke python methods - this can be done locally or
 Once these libraries are established on your web server (as well as whatever server is running your python code), then you can use the appropriate library for each language to establish communication via ZeroRPC:
 * Python: use pip to install the "zerorpc" pkg
 * Nodejs: use npm to install the "zerorpc" pkg
+
+### Setting up SQLite DB
+This app uses a SQLite DB to store info for each of the mandarin words that can be trained. You'll need to set one up in order
+for it to run successfully.
+* Install sqlite (on ubuntu you can just apt-get sqlite3 and its accompanying dev pkg, libsqlite3-dev)
+* Populate DB (coming soon - DB setup scripts will be added to this repo in the database/ directory)
+ 
+
