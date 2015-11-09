@@ -5,6 +5,20 @@
 //
 // Styleguide 1.
 
+// --- Main app
+
+.exampleChart svg {
+    position: relative;
+    display: block;
+}
+
+.audioChart svg {
+    position: relative;
+    display: block;
+}
+
+// --- Recorder
+
 .recorder-content {
     margin-top: 40px;
     margin-left: 40px;

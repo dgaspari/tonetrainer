@@ -1,10 +1,10 @@
 .tonetrainer-app
   h1 Let the tone training begin!
-  p Word goes here
-  p Your pitch graph
-  p Native speaker pitch graph
-  p Play button for native speaker
-  p Record audio button
+  p(class='mandarin-word') .
+  p(class='pinyin-word') .
+  br
+  audio(class='example-audio-player' src='' controls) 
+  br
   p
     a(href='#' class='load-prev-word' data-bypass='') Previous
     |  
@@ -12,5 +12,9 @@
     |   
     a(href='#' class='load-next-word' data-bypass='') Next
   br
+  p Native speaker example:
+  .exampleChart
+  br
+  p Your frequency chart:
   .audioChart
-
+  br
