@@ -31,12 +31,11 @@ var MainAppView = Backbone.View.extend({
     var speakerId = this.speakerChoice;
     var exampleId = this.exampleChoice;
     $.get('main/getsample?speaker=' + speakerId + '&example=' + exampleId, function(exampleData) {
-      console.log(exampleData);
       $('.mandarin-word').html(exampleData.MandarinWord);
       $('.pinyin-word').html(exampleData.PinyinWord);
-      var aBlob = new Blob([exampleData.WavFile], {type: 'audio/wav'});
-      var wavFileBlobUrl = window.URL.createObjectURL(aBlob);
-      console.log(wavFileBlobUrl);
+      var snd = new Audio("data:audio/wav;base64," + exampleData.WavFile);
+      snd.play();
+      var wavFileBlobUrl = '';
       $('.example-audio-player').attr('src',wavFileBlobUrl);
       var chart = c3.generate({
         bindto: '.exampleChart',

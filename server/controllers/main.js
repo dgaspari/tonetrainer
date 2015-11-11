@@ -19,6 +19,7 @@ var mainController = function(req, res) {
   var db = new sqlite3.Database('database/tonetrainer.db');
   db.serialize(function() {
     db.get('SELECT * FROM Examples WHERE SpeakerId = ? AND ExampleId = ?;', {1: req.query.speaker, 2: req.query.example}, function(err, row) {
+        row.WavFile = row.WavFile.toString('base64');
         res.json(row);
         db.close();
     });
