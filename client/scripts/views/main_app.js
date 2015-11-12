@@ -35,7 +35,15 @@ var MainAppView = Backbone.View.extend({
       $('.pinyin-word').html(exampleData.PinyinWord);
       var snd = new Audio("data:audio/wav;base64," + exampleData.WavFile);
       snd.play();
-      var wavFileBlobUrl = '';
+      var aBinary = atob(exampleData.WavFile);
+      var aLen = aBinary.length;
+      var aBuffer = new ArrayBuffer(aLen);
+      var aView = new Uint8Array(aBuffer);
+      for(var i=0; i<aLen; i++) {
+        aView[i] = aBinary.charCodeAt(i);
+      }
+      var aBlob = new Blob( [aView], { type: "audio/wav" });
+      var wavFileBlobUrl = URL.createObjectURL(aBlob);
       $('.example-audio-player').attr('src',wavFileBlobUrl);
       var chart = c3.generate({
         bindto: '.exampleChart',
@@ -99,7 +107,6 @@ var MainAppView = Backbone.View.extend({
       success: function(results) {
         console.log('rpc call returned:');
         results.freqmap.unshift('voice frequency (hz)');
-        console.log(results.freqmap);
         var chart = c3.generate({
           bindto: '.audioChart',
           data: {
