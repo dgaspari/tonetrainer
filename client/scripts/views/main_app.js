@@ -2,6 +2,8 @@
 
 var Recorder = require('../app/recorder/recorder.js')
 
+var tonetrainer = { exampleFreq: [] };
+
 var MainAppView = Backbone.View.extend({
 
   el: '#app-wrapper',
@@ -28,6 +30,7 @@ var MainAppView = Backbone.View.extend({
   },
 
   populateControls: function() {
+    var self = this;
     var speakerId = this.speakerChoice;
     var exampleId = this.exampleChoice;
     $.get('main/getsample?speaker=' + speakerId + '&example=' + exampleId, function(exampleData) {
@@ -45,11 +48,14 @@ var MainAppView = Backbone.View.extend({
       var aBlob = new Blob( [aView], { type: "audio/wav" });
       var wavFileBlobUrl = URL.createObjectURL(aBlob);
       $('.example-audio-player').attr('src',wavFileBlobUrl);
+
+      tonetrainer.exampleFreq = $.parseJSON(exampleData.PitchJson);
+      tonetrainer.exampleFreq.unshift('example voice frequency (hz)');
       var chart = c3.generate({
         bindto: '.exampleChart',
         data: {
           columns: [
-            $.parseJSON(exampleData.PitchJson)
+            tonetrainer.exampleFreq
           ]
         }
       });
@@ -95,6 +101,7 @@ var MainAppView = Backbone.View.extend({
 
   //TODO: change testcontroller called here to something more appropriate:
   handleWAV: function(blobdata) {
+    var self = this;
     console.log('passing blob to python module...');
     var uploadData = new FormData();
     uploadData.append('audiodata', blobdata);
@@ -106,11 +113,12 @@ var MainAppView = Backbone.View.extend({
       processData: false,
       success: function(results) {
         console.log('rpc call returned:');
-        results.freqmap.unshift('voice frequency (hz)');
+        results.freqmap.unshift('your voice frequency (hz)');
         var chart = c3.generate({
-          bindto: '.audioChart',
+          bindto: '.exampleChart',  //'.audioChart',
           data: {
             columns: [
+              tonetrainer.exampleFreq,
               results.freqmap
             ]
           }
