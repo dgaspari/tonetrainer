@@ -26,4 +26,6 @@ for it to run successfully.
 * Install sqlite (on ubuntu you can just apt-get sqlite3 and its accompanying dev pkg, libsqlite3-dev)
 * Populate DB (coming soon - DB setup scripts will be added to this repo in the database/ directory)
  
+### Referenced projects
+Client-side wav recording logic comes from [RecorderJS](https://github.com/mattdiamond/Recorderjs) by Matt Diamond (MIT License).
 
