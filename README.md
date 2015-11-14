@@ -29,4 +29,4 @@ for it to run successfully.
 ### Referenced projects
 Client-side wav recording logic comes from [RecorderJS](https://github.com/mattdiamond/Recorderjs) by Matt Diamond (MIT License).
 
-### [License (MIT)](LICENSE.md)
+### [License (MIT)](LICENSE)
