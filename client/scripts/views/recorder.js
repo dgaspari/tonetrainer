@@ -67,11 +67,17 @@ var RecorderView = Backbone.View.extend({
     { character: '便宜', filename: 'pianyi02', pinyin: 'piànyí' },
     { character: '漂亮', filename: 'piaoliang01', pinyin: 'piàoliang' },
     { character: '漂亮', filename: 'piaoliang02', pinyin: 'piàoliang' },
-    // extra words below:
+    // extra words below - these are not used for the app itself:
     { character: '這是', filename: 'zheshi01', pinyin: 'zhèshì' },
     { character: '這是', filename: 'zheshi02', pinyin: 'zhèshì' },
     { character: '美國人', filename: 'meiguoren01', pinyin: 'měiguórén' },
     { character: '美國人', filename: 'meiguoren02', pinyin: 'měiguórén' },
+    { character: '小貓', filename: 'xiaomao01', pinyin: 'xiǎomāo' },
+    { character: '小貓', filename: 'xiaomao02', pinyin: 'xiǎomāo' },
+    { character: '牛肉', filename: 'niurou01', pinyin: 'niúròu' },
+    { character: '牛肉', filename: 'niurou02', pinyin: 'niúròu' },
+    { character: '三明治', filename: 'sanmingzhi01', pinyin: 'sānmíngzhì' },
+    { character: '三明治', filename: 'sanmingzhi02', pinyin: 'sānmíngzhì' }
   ],
 
   initialize: function() {
