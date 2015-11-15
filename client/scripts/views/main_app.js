@@ -19,8 +19,8 @@ var MainAppView = Backbone.View.extend({
   initialize: function() {
     this.render();
     this.obtainMediaInfo();
-    this.speakerChoice = 1;
-    this.exampleChoice = 10;
+    this.speakerChoice = 2;
+    this.exampleChoice = 38;
     this.populateControls();
   },
 
