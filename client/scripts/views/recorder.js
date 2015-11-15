@@ -83,7 +83,7 @@ var RecorderView = Backbone.View.extend({
   initialize: function() {
     this.render();
     this.obtainMediaInfo();
-    this.setEvents();
+    this.setDisplay();
   },
 
   render: function() {
@@ -91,24 +91,13 @@ var RecorderView = Backbone.View.extend({
     return this;
   },
 
-  setEvents: function() {
-    if(window.tonetrainer_recording.pinyin) {
+  setDisplay: function() {
+    if(window.tonetrainer_recording && window.tonetrainer_recording.pinyin) {
        $('#pinyin_display').show();
     }
     else {
       $('#pinyin_display').hide();
     }
-    $('#show_pinyin_link').click(function(e) {
-      e.preventDefault();
-      var aDisplay = $('#pinyin_display');
-      if(aDisplay.is(':visible')) {
-        aDisplay.hide();
-      }
-      else {
-        aDisplay.show();
-      }
-      return false;
-    });
   },
 
   startRecording: function() {
@@ -173,13 +162,13 @@ var RecorderView = Backbone.View.extend({
     var self = this;
     var isSimple = window.tonetrainer_recording.show_simplified;
     //change intro instructions and begin process of recording:
-    $('#intro_msg').html("Now that you've allowed access to your microphone we'll start recording in 5 seconds, starting with word below:");
+    $('#intro_msg').html("Now that you've allowed access to your microphone we'll start recording in 3 seconds, starting with word below:");
     var firstItem = self.charList[0];
     $('#char_display').html(self.getMandarinChar(firstItem));
     $('#pinyin_display').html(firstItem.pinyin);
     setTimeout(function() {
       self.recordSample(self.charList);
-    }, 5000);
+    }, 4000);
   },
 
   recordSample: function(currentCharList) {
@@ -205,14 +194,14 @@ var RecorderView = Backbone.View.extend({
           $('#char_display').removeClass('recording');
           $('#char_display').html(self.getMandarinChar(nextItem));
           $('#pinyin_display').html(nextItem.pinyin);
-          setTimeout(function() { self.recordSample(currentCharList); }, 5000);
+          setTimeout(function() { self.recordSample(currentCharList); }, 4000);
         }
-      }, 3000);
+      }, 2000);
     }
   },
 
   getMandarinChar: function(jsonItem) {
-    if(window.tonetrainer_recording.show_simplified && jsonItem.simplified) {
+    if(window.tonetrainer_recording && window.tonetrainer_recording.show_simplified && jsonItem.simplified) {
       return jsonItem.simplified;
     }
     else {

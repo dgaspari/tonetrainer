@@ -135,8 +135,8 @@ var MainAppView = Backbone.View.extend({
       self.startRecording();
       setTimeout(function() {
         self.stopRecording();
-      }, 3000);
-    }, 1000);
+      }, 2000);
+    }, 800);
   },
 
   loadNextWord: function(e) {
