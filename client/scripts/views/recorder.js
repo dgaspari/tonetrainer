@@ -92,6 +92,12 @@ var RecorderView = Backbone.View.extend({
   },
 
   setEvents: function() {
+    if(window.tonetrainer_recording.pinyin) {
+       $('#pinyin_display').show();
+    }
+    else {
+      $('#pinyin_display').hide();
+    }
     $('#show_pinyin_link').click(function(e) {
       e.preventDefault();
       var aDisplay = $('#pinyin_display');
@@ -165,10 +171,11 @@ var RecorderView = Backbone.View.extend({
 
   beginRecording: function() {
     var self = this;
+    var isSimple = window.tonetrainer_recording.show_simplified;
     //change intro instructions and begin process of recording:
     $('#intro_msg').html("Now that you've allowed access to your microphone we'll start recording in 5 seconds, starting with word below:");
     var firstItem = self.charList[0];
-    $('#char_display').html(firstItem.character);
+    $('#char_display').html(self.getMandarinChar(firstItem));
     $('#pinyin_display').html(firstItem.pinyin);
     setTimeout(function() {
       self.recordSample(self.charList);
@@ -181,7 +188,7 @@ var RecorderView = Backbone.View.extend({
     var currentItem = currentCharList.shift();
     if(currentItem && self.isOnRecorderPage()) {
       $('#intro_msg').html('Recording - pronounce the word below: ');
-      $('#char_display').html(currentItem.character);
+      $('#char_display').html(self.getMandarinChar(currentItem));
       $('#char_display').addClass('recording');
       $('#pinyin_display').html(currentItem.pinyin);
       self.startRecording();
@@ -196,11 +203,20 @@ var RecorderView = Backbone.View.extend({
           var nextItem = currentCharList[0];
           $('#intro_msg').html('Paused - waiting about 3 seconds and then recording the word below:');
           $('#char_display').removeClass('recording');
-          $('#char_display').html(nextItem.character);
+          $('#char_display').html(self.getMandarinChar(nextItem));
           $('#pinyin_display').html(nextItem.pinyin);
           setTimeout(function() { self.recordSample(currentCharList); }, 5000);
         }
       }, 3000);
+    }
+  },
+
+  getMandarinChar: function(jsonItem) {
+    if(window.tonetrainer_recording.show_simplified && jsonItem.simplified) {
+      return jsonItem.simplified;
+    }
+    else {
+      return jsonItem.character;
     }
   }
 

@@ -14,6 +14,11 @@ var RecorderEndView = Backbone.View.extend({
 
   render: function() {
     this.$el.html(this.template);
+    
+    if(window.tonetrainer_recording.show_simplified) {
+      $('.thankyou').html('谢谢');
+    }
+
     return this;
   }
 
