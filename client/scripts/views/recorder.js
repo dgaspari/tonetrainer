@@ -187,6 +187,7 @@ var RecorderView = Backbone.View.extend({
           $('#intro_msg').html('Recording complete');
           $('#char_display').html();
           $('#pinyin_display').html();
+          $('#char_display').removeClass('recording');
         }
         else {
           var nextItem = currentCharList[0];
