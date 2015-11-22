@@ -7,6 +7,32 @@
 
 // --- Main app
 
+.mainapp {
+    height: 100%;
+    width: 100%;
+    min-height: 100%;
+}
+
+.tonetrainer-wrapper {
+    width: 60%;
+    float: left;
+    font-family: "Microsoft Yahei",Simsun,Arial,sans-serif;
+}
+
+.tonetrainer-wrapper h1 {
+    color: #666;
+}
+
+.tonetrainer-gutter {
+    width: 20%;
+    float: left;
+    padding: 5px;
+    border: 1px solid #1F2738;
+    background-color: #1F2738;
+    height: 100%;
+    min-height: 100%;
+}
+
 .exampleChart svg {
     position: relative;
     display: block;
@@ -21,8 +47,7 @@
 
 .recorder-content {
     margin-top: 40px;
-    margin-left: 40px;
-    margin-right: 150px;
+    text-align: center;
 }
 
 .recorder-character {

@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-<!--[if lte IE 8]><html class="lt-ie9  no-js" lang="en"><![endif]-->
-<!--[if gt IE 8]><!--><html lang="en"  class="no-js"><!--<![endif]-->
+<!--[if lte IE 8]><html class="lt-ie9  no-js mainapp" lang="en"><![endif]-->
+<!--[if gt IE 8]><!--><html lang="en"  class="no-js mainapp"><!--<![endif]-->
   <head>
     <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
@@ -30,13 +30,17 @@
     <![endif]-->
     <!-- endbuild -->
   </head>
-  <body>
+  <body class="mainapp">
     <!--[if lte IE 7]>
     <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
 
-    <!-- Application loads here -->
-    <div id="app-wrapper" ></div>
+    <div class="tonetrainer-gutter"> </div>
+    <div class="tonetrainer-wrapper">
+        <!-- Application loads here -->
+        <div id="app-wrapper" ></div>
+    </div>
+    <div class="tonetrainer-gutter"> </div>
 
     <!-- build:js({client,.tmp}) scripts/global.js -->
       <!-- bower:js -->
