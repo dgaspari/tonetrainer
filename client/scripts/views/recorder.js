@@ -162,7 +162,7 @@ var RecorderView = Backbone.View.extend({
     var self = this;
     var isSimple = window.tonetrainer_recording.show_simplified;
     //change intro instructions and begin process of recording:
-    $('#intro_msg').html("Now that you've allowed access to your microphone we'll start recording in 3 seconds, starting with word below:");
+    $('#intro_msg').html("Beginning recording process: Paused");
     var firstItem = self.charList[0];
     $('#char_display').html(self.getMandarinChar(firstItem));
     $('#pinyin_display').html(firstItem.pinyin);
@@ -176,7 +176,7 @@ var RecorderView = Backbone.View.extend({
     var self = this;
     var currentItem = currentCharList.shift();
     if(currentItem && self.isOnRecorderPage()) {
-      $('#intro_msg').html('Recording - pronounce the word below: ');
+      $('#intro_msg').html('Recording');
       $('#char_display').html(self.getMandarinChar(currentItem));
       $('#char_display').addClass('recording');
       $('#pinyin_display').html(currentItem.pinyin);
@@ -191,7 +191,7 @@ var RecorderView = Backbone.View.extend({
         }
         else {
           var nextItem = currentCharList[0];
-          $('#intro_msg').html('Paused - waiting about 3 seconds and then recording the word below:');
+          $('#intro_msg').html('Paused');
           $('#char_display').removeClass('recording');
           $('#char_display').html(self.getMandarinChar(nextItem));
           $('#pinyin_display').html(nextItem.pinyin);

@@ -17,6 +17,7 @@
     width: 60%;
     float: left;
     font-family: "Microsoft Yahei",Simsun,Arial,sans-serif;
+    padding: 30px;
 }
 
 .tonetrainer-wrapper h1 {
@@ -31,6 +32,14 @@
     background-color: #1F2738;
     height: 100%;
     min-height: 100%;
+}
+
+.tonetrainer-info, .tonetrainer-app {
+    text-align: center;
+}
+
+.recorder-msg {
+    min-height: 50px;
 }
 
 .exampleChart svg {

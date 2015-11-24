@@ -1,9 +1,10 @@
 .recorder-content
     h1 Tonetrainer Audio Recorder
     hr
-    h3(id="intro_msg") We will be recording about 60 samples with a 3 second pause between each word. Recording should take about 5-6 minutes. To start recording audio samples within the browser, accept the prompt to allow this page access to your microphone
+    h3(id="intro_msg" class="recorder-msg") You should see the browser prompting asking you to allow this page to access your microphone. Once you allow access, this page will begin presenting you with words to record. There will be a 3 second pause before each recording. When the word appears outlined in red, then the page is actively recording on your microphone.
     hr
-    p(id="char_display" class="recorder-character")
+    br
+    span(id="char_display" class="recorder-character")
     h3(id="pinyin_display" class="recorder-pinyin")
     p 
     br
