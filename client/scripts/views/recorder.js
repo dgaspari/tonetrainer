@@ -162,6 +162,7 @@ var RecorderView = Backbone.View.extend({
     var self = this;
     var isSimple = window.tonetrainer_recording.show_simplified;
     //change intro instructions and begin process of recording:
+    $('#beginning_msg').hide();
     $('#intro_msg').html("Beginning recording process: Paused");
     var firstItem = self.charList[0];
     $('#char_display').html(self.getMandarinChar(firstItem));

@@ -14,7 +14,7 @@
 }
 
 .tonetrainer-wrapper {
-    width: 60%;
+    width: 80%;
     float: left;
     font-family: "Microsoft Yahei",Simsun,Arial,sans-serif;
     padding: 30px;
@@ -25,11 +25,11 @@
 }
 
 .tonetrainer-gutter {
-    width: 20%;
+    width: 10%;
     float: left;
     padding: 5px;
-    border: 1px solid #1F2738;
-    background-color: #1F2738;
+    border: 1px solid #204483;
+    background-color: #204483;
     height: 100%;
     min-height: 100%;
 }
@@ -73,6 +73,10 @@
     border: solid red 3px;
 }
 
+.beginning-msg {
+    padding: 20px;
+}
+
 // Box sizing partial styles:
 // Apply a natural box layout model to all elements
 
@@ -92,13 +96,6 @@
 // [injector]
 // [endinjector]
 
-.yeogurt-info {
-  text-align: center;
-  max-width: 500px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
 .version {
   font-size: 14px;
   font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
@@ -117,7 +114,7 @@
   margin-top: 20px;
   border-radius: 4px;
   text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
-  background: #ed7c6c;
+  background: #8d1b31;
   display: inline-block;
   zoom: 1;
   line-height: normal;

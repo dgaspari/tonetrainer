@@ -1,13 +1,16 @@
 .recorder-content
     h1 Tonetrainer Audio Recorder
     hr
-    h3(id="intro_msg" class="recorder-msg") You should see the browser prompting asking you to allow this page to access your microphone. Once you allow access, this page will begin presenting you with words to record. There will be a 3 second pause before each recording. When the word appears outlined in red, then the page is actively recording on your microphone.
+    p(id="beginning_msg" class="beginning-msg") You should see a browser prompt asking for access to your microphone. 
+      | Once you allow access, this page will present a sequence of words to record. 
+      | There will be a 3 second pause before the microphone is active. 
+      | When the word appears outlined in red, then the microphone is actively recording. 
+      | You will get two tries per word. Try to speak the word as if in normal conversation.
+    h3(id="intro_msg" class="recorder-msg")  
     hr
     br
     span(id="char_display" class="recorder-character")
     h3(id="pinyin_display" class="recorder-pinyin")
     p 
-    br
-    br
-    br
-    a(href='#recorder_end' id='end_link') Finish recording
+    p.links
+      a(href='#recorder_end' id='end_link') Finish
