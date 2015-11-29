@@ -2,16 +2,21 @@
 * Set up a basic Ubuntu VM in AWS:
 ** get build-essential pkg
 ** install git if its not already available
-** Also install "libzmq-dev" - a package related to ZeroRPC which is used for Nodejs communicating to Python
+** make sure VM can work with a sqlite DB via this command: "sudo apt-get install sqlite3 libsqlite3-dev"
+** Also install "libzmq-dev, libzmq3, libzmq3-dev" - a package related to ZeroRPC which is used for Nodejs communicating to Python
 
 ###I. Setting up web server
 * Get code - clone from: https://github.com/dgaspari/tonetrainer.git
-* Install node, npm:
-** Follow instructions here for getting a nodejs pkg for the appropriate linux environment:
-** https://nodejs.org/en/download/package-manager/
+* Install node v0.12
+** Run this command: curl -sL https://deb.nodesource.com/setup_0.12 | sudo bash -
+** Then: sudo apt-get install nodejs
 * Install grunt and bower globally (via npm with the -g flag). 
 * Install dependencies for tonetrainer:
 ** Run "npm install" and "bower install" in the tonetrainer directory
+* Build application: "grunt build" and see if there are any errors
+* Troubleshooting:
+** If you see grunt complain about node-sass, you may need to run "npm rebuild node-sass"
+** You may also need to manually call npm install on certain packages (zerorpc, sqlite3) to get them rebuilt as well
 
 ###II. Setting up Python
 * Get code - clone from: https://github.com/dgaspari/pyrapt.git
