@@ -8,7 +8,7 @@ var settings = require('../config/env/default');
 var path = require('path');
 var sqlite3 = require('sqlite3').verbose();
 
-var mainController = function(req, res) {
+var getSample = function(req, res) {
   if(!req.query || !req.query.speaker || !req.query.example) {
     //if no speaker and example ids provided, throw an error
     console.error('Invalid request to Main Controller - expecting "speaker" and "example" in querystring');
@@ -26,6 +26,18 @@ var mainController = function(req, res) {
   });
 };
 
+var getSpeakers = function(req, res) {
+  var aReturn = [];
+  var db = new sqlite3.Database('database/tonetrainer.db');
+  db.serialize(function() {
+    db.all('SELECT * FROM Speakers;', function(err, rows) {
+      res.json(rows);
+      db.close();
+    });
+  });
+};
+
 module.exports = {
-  getsample: mainController
+  getsample: getSample,
+  getspeakers: getSpeakers
 };

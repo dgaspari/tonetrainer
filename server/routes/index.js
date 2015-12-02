@@ -51,6 +51,7 @@ var routes = function(app) {
   app.get('/main', indexController.index);
   app.get('/main_app', indexController.index);
   app.get('/main/getsample', mainController.getsample);
+  app.get('/main/getspeakers', mainController.getspeakers);
   // Recorder
   app.get('/recorder', indexController.index);
   app.get('/recorder_start', indexController.index);
