@@ -33,12 +33,6 @@ var MainAppView = Backbone.View.extend({
     var self = this;
     var speakerId = this.speakerChoice;
     var exampleId = this.exampleChoice;
-    $.get('main/getspeakers', function(speakerData) {
-      $('#speaker_select').empty();
-      for (var aId in speakerData) {
-        $('#speaker_select').append($('<option></option>').attr('value', speakerData[aId].SpeakerId).text(speakerData[aId].Name));
-      }
-    });
     $.get('main/getsample?speaker=' + speakerId + '&example=' + exampleId, function(exampleData) {
       $('.mandarin-word').html(exampleData.MandarinWord);
       $('.pinyin-word').html(exampleData.PinyinWord);
