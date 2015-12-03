@@ -6,7 +6,9 @@ var MainView = Backbone.View.extend({
 
   template: JST['client/templates/main'],
 
-  events: {},
+  events: {
+    'click .start-training-link': 'selectSpeaker'
+  },
 
   initialize: function() {
     this.render();
@@ -22,9 +24,19 @@ var MainView = Backbone.View.extend({
     $.get('main/getspeakers', function(speakerData) {
       $('#speaker_select').empty();
       for (var aId in speakerData) {
+        if(!window.tonetrainer_data) {
+            window.tonetrainer_data = { speakerId: speakerData[aId].SpeakerId };
+        }
         $('#speaker_select').append($('<option></option>').attr('value', speakerData[aId].SpeakerId).text(speakerData[aId].Name));
       }
     });
+  },
+
+  selectSpeaker: function() {
+    if(window.tonetrainer_data && window.tonetrainer_data.speakerId) {
+      var aSpeakerIdStr = $('#speaker_select').val(); 
+      window.tonetrainer_data.speakerId = parseInt(aSpeakerIdStr, 10);
+    }
   }
 
 });

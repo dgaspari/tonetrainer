@@ -27,7 +27,6 @@ var getSample = function(req, res) {
 };
 
 var getSpeakers = function(req, res) {
-  var aReturn = [];
   var db = new sqlite3.Database('database/tonetrainer.db');
   db.serialize(function() {
     db.all('SELECT * FROM Speakers;', function(err, rows) {
@@ -37,7 +36,24 @@ var getSpeakers = function(req, res) {
   });
 };
 
+var getSampleRange = function(req, res) {
+  if(!req.query || !req.query.speaker) {
+    console.error('Invalid request to Main Controller - expecting "speaker" in querystring');
+    res.status(400).send('Invalid request!');
+    return;
+  }
+  var db = new sqlite3.Database('database/tonetrainer.db');
+  db.serialize(function() {
+    db.all('SELECT ExampleId, MandarinWord, PinyinWord FROM Examples WHERE SpeakerId = ?;', {1: req.query.speaker}, function(err, rows) {
+      res.json(rows);
+      db.close();
+    });
+  });
+
+}
+
 module.exports = {
   getsample: getSample,
-  getspeakers: getSpeakers
+  getspeakers: getSpeakers,
+  getsamplerange: getSampleRange
 };

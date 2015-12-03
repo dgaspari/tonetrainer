@@ -13,15 +13,20 @@ var MainAppView = Backbone.View.extend({
   events: {
     'click .record-audio': 'recordAudio',
     'click .load-next-word': 'loadNextWord',
-    'click .load-prev-word': 'loadPrevWord'
+    'click .load-prev-word': 'loadPrevWord',
+    'click .link-out': 'navigateAway'
   },
 
   initialize: function() {
     this.render();
     this.obtainMediaInfo();
-    this.speakerChoice = 2;
-    this.exampleChoice = 70;
-    this.populateControls();
+    if(!window.tonetrainer_data) {
+      window.tonetrainer_data = { speakerId: 1 };
+    }
+    else if(!window.tonetrainer_data.speakerId) {
+      window.tonetrainer_data.speakerId = 1;
+    }
+    this.setSampleRange();
   },
 
   render: function() {
@@ -29,10 +34,21 @@ var MainAppView = Backbone.View.extend({
     return this;
   },
 
+  setSampleRange: function() {
+    var self = this;
+    $.get('main/getsamplerange?speaker=' + window.tonetrainer_data.speakerId, function(sampleRangeData) {
+      console.log(sampleRangeData);
+      //pick mid-way point:
+      var aMidIndex = Math.round(sampleRangeData.length / 2)
+      window.tonetrainer_data.exampleId = sampleRangeData[aMidIndex].ExampleId;
+      self.populateControls();
+    });
+  },
+
   populateControls: function() {
     var self = this;
-    var speakerId = this.speakerChoice;
-    var exampleId = this.exampleChoice;
+    var speakerId = window.tonetrainer_data.speakerId;
+    var exampleId = window.tonetrainer_data.exampleId;
     $.get('main/getsample?speaker=' + speakerId + '&example=' + exampleId, function(exampleData) {
       $('.mandarin-word').html(exampleData.MandarinWord);
       $('.pinyin-word').html(exampleData.PinyinWord);
@@ -141,14 +157,19 @@ var MainAppView = Backbone.View.extend({
 
   loadNextWord: function(e) {
     e.preventDefault(); 
-    this.exampleChoice += 1;
+    window.tonetrainer_data.exampleId += 1;
     this.populateControls();
   },
 
   loadPrevWord: function(e) {
     e.preventDefault(); 
-    this.exampleChoice -= 1;
+    window.tonetrainer_data.exampleId -= 1;
     this.populateControls();
+  },
+
+  navigateAway: function(e) {
+    this.unbind();
+    this.undelegateEvents();
   }
 
 });
