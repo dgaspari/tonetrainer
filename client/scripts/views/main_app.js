@@ -37,10 +37,19 @@ var MainAppView = Backbone.View.extend({
   setSampleRange: function() {
     var self = this;
     $.get('main/getsamplerange?speaker=' + window.tonetrainer_data.speakerId, function(sampleRangeData) {
-      console.log(sampleRangeData);
+      //populate example picker:
+      for(var aId in sampleRangeData) {
+        var aText = sampleRangeData[aId].MandarinWord + ' - ' + sampleRangeData[aId].PinyinWord;
+        var aOption = $('<option></option>').attr('value', sampleRangeData[aId].ExampleId).text(aText);
+        if(aId === aMidIndex) {
+          aOption.attr('selected');
+        }
+        $('#example_select').append(aOption);
+      }
       //pick mid-way point:
       var aMidIndex = Math.round(sampleRangeData.length / 2)
       window.tonetrainer_data.exampleId = sampleRangeData[aMidIndex].ExampleId;
+      $('#example_select').val(window.tonetrainer_data.exampleId);
       self.populateControls();
     });
   },
