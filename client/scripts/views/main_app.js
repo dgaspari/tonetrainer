@@ -49,7 +49,6 @@ var MainAppView = Backbone.View.extend({
       //pick mid-way point:
       var aMidIndex = Math.round(sampleRangeData.length / 2)
       window.tonetrainer_data.exampleId = sampleRangeData[aMidIndex].ExampleId;
-      $('#example_select').val(window.tonetrainer_data.exampleId);
       self.populateControls();
     });
   },
@@ -58,6 +57,7 @@ var MainAppView = Backbone.View.extend({
     var self = this;
     var speakerId = window.tonetrainer_data.speakerId;
     var exampleId = window.tonetrainer_data.exampleId;
+    $('#example_select').val(exampleId);
     $.get('main/getsample?speaker=' + speakerId + '&example=' + exampleId, function(exampleData) {
       $('.mandarin-word').html(exampleData.MandarinWord);
       $('.pinyin-word').html(exampleData.PinyinWord);
