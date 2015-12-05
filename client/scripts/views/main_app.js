@@ -58,6 +58,22 @@ var MainAppView = Backbone.View.extend({
     var self = this;
     var speakerId = window.tonetrainer_data.speakerId;
     var exampleId = window.tonetrainer_data.exampleId;
+
+    var firstSampleId = parseInt($('#example_select option:first-child').val(), 10);
+    var lastSampleId = parseInt($('#example_select option:last-child').val(), 10);
+    if(exampleId === firstSampleId) {
+      $('.load-prev-word').hide();
+    }
+    else {
+      $('.load-prev-word').show();
+    }
+    if(exampleId === lastSampleId) {
+      $('.load-next-word').hide();
+    }
+    else {
+      $('.load-next-word').show();
+    }
+
     $('#example_select').val(exampleId);
     $.get('main/getsample?speaker=' + speakerId + '&example=' + exampleId, function(exampleData) {
       $('.mandarin-word').html(exampleData.MandarinWord);
@@ -179,7 +195,7 @@ var MainAppView = Backbone.View.extend({
 
   selectExample: function(e) {
     e.preventDefault();
-    window.tonetrainer_data.exampleId = $(e.target).val();
+    window.tonetrainer_data.exampleId = parseInt($(e.target).val(), 10);
     this.populateControls();
   },
 
