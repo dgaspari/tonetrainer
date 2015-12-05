@@ -14,7 +14,8 @@ var MainAppView = Backbone.View.extend({
     'click .record-audio': 'recordAudio',
     'click .load-next-word': 'loadNextWord',
     'click .load-prev-word': 'loadPrevWord',
-    'click .link-out': 'navigateAway'
+    'click .link-out': 'navigateAway',
+    'change #example_select': 'selectExample'
   },
 
   initialize: function() {
@@ -173,6 +174,12 @@ var MainAppView = Backbone.View.extend({
   loadPrevWord: function(e) {
     e.preventDefault(); 
     window.tonetrainer_data.exampleId -= 1;
+    this.populateControls();
+  },
+
+  selectExample: function(e) {
+    e.preventDefault();
+    window.tonetrainer_data.exampleId = $(e.target).val();
     this.populateControls();
   },
 
