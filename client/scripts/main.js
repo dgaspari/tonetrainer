@@ -39,4 +39,3 @@ $(document).on('click', 'a:not([data-bypass])', function(event) {
 
 });
 
-console.log('Welcome to Yeogurt');
