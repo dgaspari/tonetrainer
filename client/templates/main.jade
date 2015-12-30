@@ -7,7 +7,16 @@
     | of the word you just spoke will be mapped alongside the experienced speaker. Use this feedback to practice speaking tones
     | naturally. You can select other words to practice using the dropdown or the "Previous" and "Next" buttons.
   p Choose which speaker you want to hear speaking the example words. Then hit "Start training"
+  hr
   select(id='speaker_select')
+  br
+  br
+  input(id='showsimplified' type='checkbox' checked)
+  label Show simplified characters?
+  br
+  br
+  input(id='showpinyin' type='checkbox' checked)
+  label Show pinyin?
   p.links
     a(href='#main_app' class='start-training-link') Start training
     a(href='#') Home
