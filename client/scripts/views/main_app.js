@@ -22,17 +22,31 @@ var MainAppView = Backbone.View.extend({
     this.render();
     this.obtainMediaInfo();
     if(!window.tonetrainer_data) {
-      window.tonetrainer_data = { speakerId: 1 };
+      window.tonetrainer_data = { 
+        speakerId: 1,
+        isSimplified: true,
+        isShowPinyin: true
+      };
     }
     else if(!window.tonetrainer_data.speakerId) {
       window.tonetrainer_data.speakerId = 1;
     }
+    this.toggleDisplay();
     this.setSampleRange();
   },
 
   render: function() {
     this.$el.html(this.template);
     return this;
+  },
+
+  toggleDisplay: function() {
+    if(window.tonetrainer_data.isShowPinyin) {
+      $('.pinyin-word').show();
+    }
+    else {
+      $('.pinyin-word').hide();
+    }
   },
 
   setSampleRange: function() {
