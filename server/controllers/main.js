@@ -44,7 +44,7 @@ var getSampleRange = function(req, res) {
   }
   var db = new sqlite3.Database('database/tonetrainer.db');
   db.serialize(function() {
-    db.all('SELECT ExampleId, MandarinWord, PinyinWord FROM Examples WHERE SpeakerId = ?;', {1: req.query.speaker}, function(err, rows) {
+    db.all('SELECT ExampleId, MandarinWord, SimplifiedWord, PinyinWord FROM Examples WHERE SpeakerId = ?;', {1: req.query.speaker}, function(err, rows) {
       res.json(rows);
       db.close();
     });

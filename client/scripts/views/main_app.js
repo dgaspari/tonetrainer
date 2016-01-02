@@ -54,7 +54,13 @@ var MainAppView = Backbone.View.extend({
     $.get('main/getsamplerange?speaker=' + window.tonetrainer_data.speakerId, function(sampleRangeData) {
       //populate example picker:
       for(var aId in sampleRangeData) {
-        var aText = sampleRangeData[aId].MandarinWord + ' - ' + sampleRangeData[aId].PinyinWord;
+        var aText = "";
+        if(window.tonetrainer_data.isSimplified) {
+          aText = sampleRangeData[aId].SimplifiedWord + ' - ' + sampleRangeData[aId].PinyinWord;
+        }
+        else {
+          aText = sampleRangeData[aId].MandarinWord + ' - ' + sampleRangeData[aId].PinyinWord;
+        }
         var aOption = $('<option></option>').attr('value', sampleRangeData[aId].ExampleId).text(aText);
         if(aId === aMidIndex) {
           aOption.attr('selected');
@@ -90,7 +96,12 @@ var MainAppView = Backbone.View.extend({
 
     $('#example_select').val(exampleId);
     $.get('main/getsample?speaker=' + speakerId + '&example=' + exampleId, function(exampleData) {
-      $('.mandarin-word').html(exampleData.MandarinWord);
+      if(window.tonetrainer_data.isSimplified) {
+        $('.mandarin-word').html(exampleData.SimplifiedWord);
+      }
+      else {
+        $('.mandarin-word').html(exampleData.MandarinWord);
+      }
       $('.pinyin-word').html(exampleData.PinyinWord);
       var snd = new Audio("data:audio/wav;base64," + exampleData.WavFile);
       snd.play();
