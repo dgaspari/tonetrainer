@@ -9,7 +9,8 @@ var MainView = Backbone.View.extend({
   events: {
     'click .start-training-link': 'selectSpeaker',
     'change #showpinyin': 'isShowPinyinChanged',
-    'change #showsimplified': 'isShowSimplifiedChanged'
+    'change #showsimplified': 'isShowSimplifiedChanged',
+    'click .link-out': 'navigateAway'
   },
 
   initialize: function() {
@@ -26,14 +27,18 @@ var MainView = Backbone.View.extend({
     $.get('main/getspeakers', function(speakerData) {
       $('#speaker_select').empty();
       for (var aId in speakerData) {
-        if(!window.tonetrainer_data) {
-            window.tonetrainer_data = { 
-	      speakerId: speakerData[aId].SpeakerId,
+        $('#speaker_select').append($('<option></option>').attr('value', speakerData[aId].SpeakerId).text(speakerData[aId].Name));
+      }
+      if(!window.tonetrainer_data) {
+        window.tonetrainer_data = { 
+	      speakerId: speakerData[0].SpeakerId,
 	      isSimplified: true,
 	      isShowPinyin: true
 	    };
-        }
-        $('#speaker_select').append($('<option></option>').attr('value', speakerData[aId].SpeakerId).text(speakerData[aId].Name));
+      }
+      else {
+        $('#showpinyin').prop('checked', window.tonetrainer_data.isShowPinyin);
+        $('#showsimplified').prop('checked', window.tonetrainer_data.isSimplified);
       }
     });
   },
@@ -55,7 +60,12 @@ var MainView = Backbone.View.extend({
     if(window.tonetrainer_data) {
       window.tonetrainer_data.isShowPinyin = $(event.target).is(':checked'); 
     }
-  }
+  },
+
+   navigateAway: function(e) {
+     this.unbind();
+     this.undelegateEvents();
+   }
 
 });
 
