@@ -210,7 +210,7 @@ var MainAppView = Backbone.View.extend({
     }, 800);
     }
     else {
-      alert('You must allow this web application to access your browser before it can record audio.');
+      alert('You must grant this web application access to your microphone before it can record audio.');
     }
   },
 
