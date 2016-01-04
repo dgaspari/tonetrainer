@@ -196,14 +196,22 @@ var MainAppView = Backbone.View.extend({
 
   recordAudio: function(e) {
     e.preventDefault();
+    var recordBtn = $(e.target);
     var self = this;
     //wait 1 second, start recording, stop after 3 seconds. load data
+    if(self.recorder) {
     setTimeout(function() {
+      recordBtn.addClass('recording-active');
       self.startRecording();
       setTimeout(function() {
+        recordBtn.removeClass('recording-active');
         self.stopRecording();
       }, 2000);
     }, 800);
+    }
+    else {
+      alert('You must allow this web application to access your browser before it can record audio.');
+    }
   },
 
   loadNextWord: function(e) {

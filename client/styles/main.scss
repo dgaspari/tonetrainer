@@ -28,12 +28,36 @@
     color: #666;
 }
 
+.links a {
+  color: white;
+  margin-right: 5px;
+  margin-top: 20px;
+  border-radius: 4px;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+  background: #8d1b31;
+  display: inline-block;
+  zoom: 1;
+  line-height: normal;
+  white-space: nowrap;
+  vertical-align: baseline;
+  text-align: center;
+  cursor: pointer;
+  font-size: 100%;
+  padding: .5em 1em;
+  text-decoration: none;
+}
+
 .tonetrainer-info, .tonetrainer-app {
     text-align: center;
 }
 
 .recorder-msg {
     min-height: 50px;
+}
+
+.recording-active {
+    font-weight: bold;
+    background: black !important;
 }
 
 .exampleChart svg {
@@ -110,24 +134,6 @@
   margin-top: 15px;
 }
 
-.links a {
-  color: white;
-  margin-right: 5px;
-  margin-top: 20px;
-  border-radius: 4px;
-  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
-  background: #8d1b31;
-  display: inline-block;
-  zoom: 1;
-  line-height: normal;
-  white-space: nowrap;
-  vertical-align: baseline;
-  text-align: center;
-  cursor: pointer;
-  font-size: 100%;
-  padding: .5em 1em;
-  text-decoration: none;
-}
 
 
 
