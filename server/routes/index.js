@@ -64,6 +64,11 @@ var routes = function(app) {
     res.status(204).end();
   });
 
+// non-test method - used exclusively to call pyrapt via ZeroRPC:
+   app.post('/test/sendfreq', testUpload.single('audiodata'), function(req, res, next) {
+     sendFrequencyController.sendFrequency(req, res);
+   });
+
   // Test
   app.get('/test', indexController.index);
   app.get('/test/getallexamples', testController.getallexamples);

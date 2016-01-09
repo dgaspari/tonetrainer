@@ -44,7 +44,9 @@ var TestView = Backbone.View.extend({
   },
 
   selectExample: function() {
+    var self = this;
     var exampleId = $('#example_select').val();
+    $('.exampleChart').hide();
     $.get('test/getsample?example=' + exampleId, function(exampleData) {
       var snd = new Audio("data:audio/wav;base64," + exampleData.WavFile);
       snd.play();
@@ -59,19 +61,37 @@ var TestView = Backbone.View.extend({
       var wavFileBlobUrl = URL.createObjectURL(aBlob);
       $('.example-audio-player').attr('src',wavFileBlobUrl);
 
-      var aExampleFreq = $.parseJSON(exampleData.PitchJson);
-      aExampleFreq.unshift('example voice frequency (hz)');
-      var chart = c3.generate({
-        bindto: '.exampleChart',
-        data: {
-          columns: [
-            aExampleFreq
-          ]
-        }
-      });
+      self.handleWAV(aBlob);
     });
   },
 
+  handleWAV: function(blobdata) {
+    var self = this;
+    console.log('passing blob to python module...');
+    var uploadData = new FormData();
+    uploadData.append('audiodata', blobdata);
+    $.ajax({
+      url: 'test/sendfreq',
+      type: 'POST',
+      data: uploadData,
+      contentType: false,
+      processData: false,
+      success: function(results) {
+        console.log('rpc call returned:');
+        results.freqmap.unshift('your voice frequency (hz)');
+        var chart = c3.generate({
+          bindto: '.exampleChart',  //'.audioChart',
+          data: {
+            columns: [
+              results.freqmap
+            ]
+          }
+        });
+        $('.exampleChart').show();
+      }
+    });
+  },
+  
   navigateAway: function(e) {
     this.unbind();
     this.undelegateEvents();

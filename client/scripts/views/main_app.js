@@ -166,7 +166,7 @@ var MainAppView = Backbone.View.extend({
     this.recorder && this.recorder.clear();
   },
 
-  //TODO: change testcontroller called here to something more appropriate:
+  //TODO: change controller called here to something more appropriate:
   handleWAV: function(blobdata) {
     var self = this;
     console.log('passing blob to python module...');
