@@ -10,7 +10,8 @@ var TestView = Backbone.View.extend({
 
   events: {
     'click .link-out': 'navigateAway',
-    'change #example_select': 'selectExample'
+    'change #example_select': 'selectExample',
+    'click .recalc-freq': 'selectExample'
   },
 
   audio_context: null,
