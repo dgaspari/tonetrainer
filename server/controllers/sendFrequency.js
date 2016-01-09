@@ -7,6 +7,7 @@
 var settings = require('../config/env/default');
 var path = require('path');
 var zerorpc = require('zerorpc');
+var fs = require('fs');
 
 var sendFrequencyController = function(req, res) {
   //sendfreq - make RPC call w/ blob and get freq map for input
@@ -19,6 +20,8 @@ var sendFrequencyController = function(req, res) {
   client.invoke('raptforfile', req.file.path, function(error, rpcRes, more) {
     freqResults = rpcRes;
     res.json({'freqmap': freqResults});
+    //at this point it should be safe to delete the file:
+    fs.unlinkSync(req.file.path);
   });
 };
 

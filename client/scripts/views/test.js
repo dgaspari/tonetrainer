@@ -70,8 +70,10 @@ var TestView = Backbone.View.extend({
     console.log('passing blob to python module...');
     var uploadData = new FormData();
     uploadData.append('audiodata', blobdata);
+    uploadData.append('tcost', $('#rapt_tcost').val());
+    uploadData.append('dcost', $('#rapt_dcost').val());
     $.ajax({
-      url: 'test/sendfreq',
+      url: 'test/testsendfreq',
       type: 'POST',
       data: uploadData,
       contentType: false,

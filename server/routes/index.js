@@ -73,6 +73,9 @@ var routes = function(app) {
   app.get('/test', indexController.index);
   app.get('/test/getallexamples', testController.getallexamples);
   app.get('/test/getsample', testController.getsample);
+  app.post('/test/testsendfreq', testUpload.single('audiodata'), function(req, res, next) {
+    testController.testsendfreq(req, res);
+  });
 };
 
 module.exports = routes;
