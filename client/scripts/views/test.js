@@ -8,7 +8,10 @@ var TestView = Backbone.View.extend({
 
   template: JST['client/templates/test'],
 
-  events: {},
+  events: {
+    'click .link-out': 'navigateAway',
+    'change #example_select': 'selectExample'
+  },
 
   audio_context: null,
 
@@ -18,8 +21,7 @@ var TestView = Backbone.View.extend({
 
   initialize: function() {
     this.render();
-    this.setupClickHandlers();
-    this.obtainMediaInfo();
+    this.populateControls();
   },
 
   render: function() {
@@ -27,6 +29,55 @@ var TestView = Backbone.View.extend({
     return this;
   },
 
+  populateControls: function() {
+    var self = this;
+    var aSelect = $('#example_select');
+    $.get('test/getallexamples', function(exampleData) {
+      aSelect.empty();
+      for (var aId in exampleData) {
+        var aText = '(' + exampleData[aId].ExampleId  + ') - ' + exampleData[aId].Name + ' - '  + exampleData[aId].MandarinWord;
+        aText += ' - ' + exampleData[aId].PinyinWord;
+        aSelect.append($('<option></option>').attr('value', exampleData[aId].ExampleId).text(aText));
+      }
+      self.selectExample();
+    });
+  },
+
+  selectExample: function() {
+    var exampleId = $('#example_select').val();
+    $.get('test/getsample?example=' + exampleId, function(exampleData) {
+      var snd = new Audio("data:audio/wav;base64," + exampleData.WavFile);
+      snd.play();
+      var aBinary = atob(exampleData.WavFile);
+      var aLen = aBinary.length;
+      var aBuffer = new ArrayBuffer(aLen);
+      var aView = new Uint8Array(aBuffer);
+      for(var i=0; i<aLen; i++) {
+        aView[i] = aBinary.charCodeAt(i);
+      }
+      var aBlob = new Blob( [aView], { type: "audio/wav" });
+      var wavFileBlobUrl = URL.createObjectURL(aBlob);
+      $('.example-audio-player').attr('src',wavFileBlobUrl);
+
+      var aExampleFreq = $.parseJSON(exampleData.PitchJson);
+      aExampleFreq.unshift('example voice frequency (hz)');
+      var chart = c3.generate({
+        bindto: '.exampleChart',
+        data: {
+          columns: [
+            aExampleFreq
+          ]
+        }
+      });
+    });
+  },
+
+  navigateAway: function(e) {
+    this.unbind();
+    this.undelegateEvents();
+  }
+
+/*
   setupClickHandlers: function() {
     var self = this;
     $('#recordAudio').click(function() {
@@ -104,7 +155,7 @@ var TestView = Backbone.View.extend({
     self.recorder = new Recorder(input);
     console.log('Recorder initialised.');
   }
-
+*/
 });
 
 module.exports = TestView;

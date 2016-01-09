@@ -1,35 +1,15 @@
-h1 Welcome to the test page!
+.testpage-content
+    h1 Tonetrainer Test Page
+    hr
+    p Calculate pitch for recorded sample:
+    select(id='example_select')
+    br
+    br
+    audio(class='example-audio-player' src='' controls)
+    br
+    p Frequency chart:
+    .exampleChart
+    hr
+    p(class='links link-out')
+        a(href='#') Home
 
-p 
-  This is just a quick test page
-
-p
-  This is just a link
-
-a(href='/') back to index page
-
-p
-  This is a simple audio recorder:
-
-button(id="recordAudio").
-  Record
-
-button(id="stopRecordingAudio").
-  Stop
-
-ul(id="recordingList").
-
-div(id="chart").
-
-div(id="vis" class="spectrogram").
-
-hr
-
-canvas(id="altspectrogram-canvas" style="background-color: black; position: relative;" width="800" height="256").
-
-p(id="altspectrogram-controls")
-  input(type="button" id="start_button" value="Start").
-
-  input(type="button" id="stop_button" value="Stop").
-
-hr
