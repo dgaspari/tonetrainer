@@ -49,6 +49,8 @@ var TestView = Backbone.View.extend({
     var exampleId = $('#example_select').val();
     $('.exampleChart').hide();
     $.get('test/getsample?example=' + exampleId, function(exampleData) {
+      window.exampleFreq = $.parseJSON(exampleData.PitchJson);
+      window.exampleFreq.unshift('example voice frequency (hz)');
       var snd = new Audio("data:audio/wav;base64," + exampleData.WavFile);
       snd.play();
       var aBinary = atob(exampleData.WavFile);
@@ -81,11 +83,12 @@ var TestView = Backbone.View.extend({
       processData: false,
       success: function(results) {
         console.log('rpc call returned:');
-        results.freqmap.unshift('your voice frequency (hz)');
+        results.freqmap.unshift('new test voice frequency (hz)');
         var chart = c3.generate({
           bindto: '.exampleChart',  //'.audioChart',
           data: {
             columns: [
+              window.exampleFreq,
               results.freqmap
             ]
           }
