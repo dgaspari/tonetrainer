@@ -4,10 +4,20 @@
     p Parameters to use for RAPT:
     label Transition Cost: 
     input(id='rapt_tcost' value='0.5')
-    br
-    br
-    label Doubling Cost:
+    label  Doubling Cost:
     input(id='rapt_dcost' value='30')
+    br
+    br
+    label  Additive Constant: 
+    input(id='rapt_addconst' value='10000')
+    label  Voicing Bias:
+    input(id='rapt_vobias' value='0.0')
+    br
+    br
+    label  Lag Weight: 
+    input(id='rapt_lagwt' value='0.3')
+    label  Frequency Weight:
+    input(id='rapt_freqwt' value='0.02')
     p.links
         a(href='#' class='recalc-freq' data-bypass='') Recalc
     p Calculate pitch for recorded sample:

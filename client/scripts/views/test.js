@@ -75,6 +75,10 @@ var TestView = Backbone.View.extend({
     uploadData.append('audiodata', blobdata);
     uploadData.append('tcost', $('#rapt_tcost').val());
     uploadData.append('dcost', $('#rapt_dcost').val());
+    uploadData.append('addconst', $('#rapt_addconst').val());
+    uploadData.append('vobias', $('#rapt_vobias').val());
+    uploadData.append('lagwt', $('#rapt_lagwt').val());
+    uploadData.append('freqwt', $('#rapt_freqwt').val());
     $.ajax({
       url: 'test/testsendfreq',
       type: 'POST',

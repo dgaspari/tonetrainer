@@ -50,8 +50,12 @@ var testSendFreq = function(req, res) {
   //get params
   var aTcost = parseFloat(req.body.tcost);
   var aDcost = parseFloat(req.body.dcost);
+  var aAddConst = parseFloat(req.body.addconst);
+  var aVoBias = parseFloat(req.body.vobias);
+  var aLagWt = parseFloat(req.body.lagwt);
+  var aFreqWt = parseFloat(req.body.freqwt);
   //RPC call
-  client.invoke('testraptforfile', req.file.path, aTcost, aDcost, function(error, rpcRes, more) {
+  client.invoke('testraptforfile', req.file.path, aTcost, aDcost, aAddConst, aVoBias, aLagWt, aFreqWt, function(error, rpcRes, more) {
     freqResults = rpcRes;
     res.json({'freqmap': freqResults});
     //at this point it should be fine to delete the file:
