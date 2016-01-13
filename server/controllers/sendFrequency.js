@@ -20,8 +20,8 @@ var sendFrequencyController = function(req, res) {
   client.invoke('raptforfile', req.file.path, function(error, rpcRes, more) {
     freqResults = rpcRes;
     res.json({'freqmap': freqResults});
-    //at this point it should be safe to delete the file:
-    fs.unlinkSync(req.file.path);
+    //at this point it should be safe to delete the file?
+    //fs.unlinkSync(req.file.path);
   });
 };
 

@@ -87,16 +87,28 @@ var TestView = Backbone.View.extend({
       processData: false,
       success: function(results) {
         console.log('rpc call returned:');
-        results.freqmap.unshift('new test voice frequency (hz)');
-        var chart = c3.generate({
-          bindto: '.exampleChart',  //'.audioChart',
-          data: {
-            columns: [
-              window.exampleFreq,
-              results.freqmap
-            ]
-          }
-        });
+        if(results.freqmap) {
+          results.freqmap.unshift('new test voice frequency (hz)');
+          var chart = c3.generate({
+            bindto: '.exampleChart',  //'.audioChart',
+            data: {
+              columns: [
+                window.exampleFreq,
+                results.freqmap
+              ]
+            }
+          });
+        }
+        else {
+          var chart = c3.generate({
+            bindto: '.exampleChart',
+            data: {
+              columns: [
+                window.exampleFreq
+              ]
+            }
+          });
+        }
         $('.exampleChart').show();
       }
     });

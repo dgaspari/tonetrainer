@@ -58,8 +58,8 @@ var testSendFreq = function(req, res) {
   client.invoke('testraptforfile', req.file.path, aTcost, aDcost, aAddConst, aVoBias, aLagWt, aFreqWt, function(error, rpcRes, more) {
     freqResults = rpcRes;
     res.json({'freqmap': freqResults});
-    //at this point it should be fine to delete the file:
-    fs.unlink(req.file.path);
+    //ok to delte the file?
+    //fs.unlink(req.file.path);
   });
 };
 
