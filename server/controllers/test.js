@@ -41,7 +41,7 @@ var getSample = function(req, res) {
 var testSendFreq = function(req, res) {
   //sendfreq - make RPC call w/ blob and get freq map for input
   var freqResults = {};
-  var client = new zerorpc.Client();
+  var client = new zerorpc.Client({timeout: 40, heartbeatInterval: 35000});
   client.connect('tcp://127.0.0.1:4242');
   console.log('about to send RPC call to testraptforfile');
   console.log(req.body);
@@ -56,6 +56,9 @@ var testSendFreq = function(req, res) {
   var aFreqWt = parseFloat(req.body.freqwt);
   //RPC call
   client.invoke('testraptforfile', req.file.path, aTcost, aDcost, aAddConst, aVoBias, aLagWt, aFreqWt, function(error, rpcRes, more) {
+    if(error) {
+      console.error(error);
+    }
     freqResults = rpcRes;
     res.json({'freqmap': freqResults});
     //ok to delte the file?
