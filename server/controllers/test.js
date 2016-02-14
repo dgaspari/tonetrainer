@@ -61,8 +61,8 @@ var testSendFreq = function(req, res) {
     }
     freqResults = rpcRes;
     res.json({'freqmap': freqResults});
-    //ok to delte the file?
-    //fs.unlink(req.file.path);
+    //ok to delte the file at this point once we have reults to return
+    fs.unlink(req.file.path);
   });
 };
 
