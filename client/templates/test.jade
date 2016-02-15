@@ -3,9 +3,9 @@
     hr
     p Parameters to use for RAPT:
     label Transition Cost: 
-    input(id='rapt_tcost' value='0.5')
+    input(id='rapt_tcost' value='0.005')
     label  Doubling Cost:
-    input(id='rapt_dcost' value='30')
+    input(id='rapt_dcost' value='0.3')
     br
     br
     label  Additive Constant: 
@@ -18,6 +18,14 @@
     input(id='rapt_lagwt' value='0.3')
     label  Frequency Weight:
     input(id='rapt_freqwt' value='0.02')
+    br
+    br
+    label   # Of Cands Per Frame:
+    input(id='rapt_numcands' value='20')
+    label   Use Two-Pass NCCF?
+    select(id='rapt_istwopass')
+        option(value='true')    true
+        option(value='false')   false
     p.links
         a(href='#' class='recalc-freq' data-bypass='') Recalc
     p Calculate pitch for recorded sample:

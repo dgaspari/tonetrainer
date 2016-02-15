@@ -54,16 +54,20 @@ var testSendFreq = function(req, res) {
   var aVoBias = parseFloat(req.body.vobias);
   var aLagWt = parseFloat(req.body.lagwt);
   var aFreqWt = parseFloat(req.body.freqwt);
+  var aNumCands = parseInt(req.body.numcands);
+  var aIsTwoPass = (req.body.istwopass === 'true');
   //RPC call
-  client.invoke('testraptforfile', req.file.path, aTcost, aDcost, aAddConst, aVoBias, aLagWt, aFreqWt, function(error, rpcRes, more) {
-    if(error) {
-      console.error(error);
+  client.invoke('testraptforfile', req.file.path, aTcost, aDcost, aAddConst, aVoBias, aLagWt, aFreqWt, aNumCands, aIsTwoPass,
+    function(error, rpcRes, more) {
+      if(error) {
+        console.error(error);
+      }
+      freqResults = rpcRes;
+      res.json({'freqmap': freqResults});
+      //ok to delte the file at this point once we have reults to return
+      fs.unlink(req.file.path);
     }
-    freqResults = rpcRes;
-    res.json({'freqmap': freqResults});
-    //ok to delte the file at this point once we have reults to return
-    fs.unlink(req.file.path);
-  });
+  );
 };
 
 module.exports = {

@@ -79,6 +79,8 @@ var TestView = Backbone.View.extend({
     uploadData.append('vobias', $('#rapt_vobias').val());
     uploadData.append('lagwt', $('#rapt_lagwt').val());
     uploadData.append('freqwt', $('#rapt_freqwt').val());
+    uploadData.append('numcands', $('#rapt_numcands').val());
+    uploadData.append('istwopass', $('#rapt_istwopass').val());
     $.ajax({
       url: 'test/testsendfreq',
       type: 'POST',
