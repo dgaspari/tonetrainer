@@ -87,7 +87,7 @@ var TestView = Backbone.View.extend({
       data: uploadData,
       contentType: false,
       processData: false,
-      timeout: 40000,
+      timeout: 85000,
       success: function(results) {
         console.log('rpc call returned:');
         if(results.freqmap) {

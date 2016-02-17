@@ -41,7 +41,7 @@ var getSample = function(req, res) {
 var testSendFreq = function(req, res) {
   //sendfreq - make RPC call w/ blob and get freq map for input
   var freqResults = {};
-  var client = new zerorpc.Client({timeout: 40, heartbeatInterval: 35000});
+  var client = new zerorpc.Client({timeout: 85, heartbeatInterval: 85000});
   client.connect('tcp://127.0.0.1:4242');
   console.log('about to send RPC call to testraptforfile');
   console.log(req.body);
