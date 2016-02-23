@@ -56,8 +56,9 @@ var testSendFreq = function(req, res) {
   var aFreqWt = parseFloat(req.body.freqwt);
   var aNumCands = parseInt(req.body.numcands);
   var aIsTwoPass = (req.body.istwopass === 'true');
+  var aIsUseFilter = (req.body.isfilter === 'true');
   //RPC call
-  client.invoke('testraptforfile', req.file.path, aTcost, aDcost, aAddConst, aVoBias, aLagWt, aFreqWt, aNumCands, aIsTwoPass,
+  client.invoke('testraptforfile', req.file.path, aTcost, aDcost, aAddConst, aVoBias, aLagWt, aFreqWt, aNumCands, aIsTwoPass, aIsUseFilter,
     function(error, rpcRes, more) {
       if(error) {
         console.error(error);
