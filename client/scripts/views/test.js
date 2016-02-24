@@ -114,6 +114,11 @@ var TestView = Backbone.View.extend({
           });
         }
         $('.exampleChart').show();
+
+        if(results.nccf) {
+          var nccfJsonString = JSON.stringify(results.nccf, undefined, 4);
+          $('#nccf_output').val(nccfJsonString);
+        }
       }
     });
   },
@@ -123,85 +128,6 @@ var TestView = Backbone.View.extend({
     this.undelegateEvents();
   }
 
-/*
-  setupClickHandlers: function() {
-    var self = this;
-    $('#recordAudio').click(function() {
-      self.recorder && self.recorder.record();
-      console.log('Recording...');
-    });
-    $('#stopRecordingAudio').click(function() {
-      self.recorder && self.recorder.stop();
-      console.log('Stopped recording');
-      self.addDownloadLink();
-      self.recorder && self.recorder.clear();
-    });
-  },
-
-  addDownloadLink: function() {
-    this.recorder && this.recorder.exportWAV(this.handleWAV);
-  },
-
-  handleWAV: function(blobdata) {
-    console.log('passing blob to python module...');
-    var uploadData = new FormData();
-    uploadData.append('audiodata', blobdata);
-    $.ajax({
-      url: 'test/sendfreq',
-      type: 'POST',
-      data: uploadData,
-      contentType: false,
-      processData: false,
-      success: function(results) {
-        console.log('rpc call returned:');
-        results.freqmap.unshift('voice frequency (hz)');
-        console.log(results.freqmap);
-        var chart = c3.generate({
-          bindto: '#chart',
-          data: {
-            columns: [
-              results.freqmap
-            ]
-          }
-        });
-      }
-    });
-    console.log('adding link to wav file...');
-    var listRef = $('#recordingList');
-    // TODO: add logic to deal when currentidx is not -1 (from JSSSoundRecorder impl of handleWAV)
-    var url = URL.createObjectURL(blobdata);
-    var fileTimeStamp = new Date().toISOString() + '.wav';
-    listRef.append('<li><a class="audio-download-link" data-bypass=""  href="' + url + '" download="' + fileTimeStamp + '">Download audio sample</a></li>');
-    var sample = new Spectrogram(url, "#vis", {width:500, height:200, maxFrequency:8000});
-    setupAltSpectrogram(url);
-  },
-
-  obtainMediaInfo: function() {
-    var self = this;
-    var startMediaFunction = function(stream) { return self.startUserMedia(self, stream); };
-    // webkit shim
-    window.AudioContext = window.AudioContext || window.webkitAudioContext || window.mozAudioContext;
-    navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
-    window.URL = window.URL || window.webkitURL || window.mozURL;
-    navigator.getUserMedia({audio: true}, startMediaFunction, function(e) {
-      console.warn('No live audio input: ' + e);
-    });
-  },
-
-  startUserMedia: function(self, stream) {
-
-    self.audio_context = new AudioContext();
-    var input = self.audio_context.createMediaStreamSource(stream);
-    console.log('Media stream created.');
-    self.volume = self.audio_context.createGain();
-    self.volume.gain.value = 0;
-    input.connect(self.volume)
-    self.volume.connect(self.audio_context.destination);
-    console.log('Input connected to audio context destination.');
-    self.recorder = new Recorder(input);
-    console.log('Recorder initialised.');
-  }
-*/
 });
 
 module.exports = TestView;

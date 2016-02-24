@@ -14,7 +14,7 @@ var sendFrequencyController = function(req, res) {
   var freqResults = {};
   var client = new zerorpc.Client();
   client.connect('tcp://127.0.0.1:4242');
-  console.log('about to send request to raptforblob');
+  console.log('about to send request to raptforfile');
   //req.files has reference to the audio file just uploaded - need to open it, send data via RPC, and delete it once
   //we've finished.
   client.invoke('raptforfile', req.file.path, function(error, rpcRes, more) {
