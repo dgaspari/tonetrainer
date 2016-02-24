@@ -117,6 +117,7 @@ var TestView = Backbone.View.extend({
 
         if(results.nccf) {
           var nccfJsonString = JSON.stringify(results.nccf, undefined, 4);
+          $('#nccf_output').val('');
           $('#nccf_output').val(nccfJsonString);
         }
       }
