@@ -129,16 +129,23 @@ var TestView = Backbone.View.extend({
               '.95': 'white'
             }
           };
-          var heatMapInstance = h337.create(heatMapConfig);
+          // var heatMapInstance = h337.create(heatMapConfig);
           var dataPoints = [];
+          var xPoints = [];
+          var yPoints = [];
+          var zPoints = [];
           for(var i=0;i<results.nccf[0].length;i++) {
+            xPoints.push(i);
             for(var j=0;j<results.nccf[0][i].length;j++) {
               if(results.nccf[0][i][j][0] != 0 && results.nccf[0][i][j][1] != 0) {
-                var x = i + 1;
+                var x = i;
                 var y = results.nccf[0][i][j][0];
                 var z = results.nccf[0][i][j][1]; 
                 var newDataPoint = { x: x, y: y, z: z};
                 dataPoints.push(newDataPoint);
+
+                yPoints.push(y);
+                zPoints.push(z);
               }
             }
           }
@@ -147,8 +154,15 @@ var TestView = Backbone.View.extend({
           //var nccfJsonString = JSON.stringify(results.nccf, undefined, 4);
           $('#nccf_output').val('');
           $('#nccf_output').val(nccfJsonString);
-          
-          heatMapInstance.addData(dataPoints);
+          var data = [{
+            z: zPoints,
+            y: yPoints,
+            x: xPoints,
+            type: 'heatmap'
+          }];
+          Plotly.newPlot('nccf_map', data);
+
+          //heatMapInstance.addData(dataPoints);
         }
       }
     });
