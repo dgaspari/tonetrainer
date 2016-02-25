@@ -118,17 +118,37 @@ var TestView = Backbone.View.extend({
         if(results.nccf) {
           //populate heat map:
           var heatContainer = document.getElementById('nccf_map');
-          var heatMapConfig = { container: heatContainer, radius: 10, maxOpacity: .5, minOpacity: 0, blue: .75 };
+          var heatMapConfig = { 
+            container: heatContainer, 
+            backgroundColor: 'rgba(0,0,0,.95)', 
+            maxOpacity: .9, 
+            minOpacity: .3,
+            gradient: {
+              '.5': 'blue',
+              '.8': 'red',
+              '.95': 'white'
+            }
+          };
           var heatMapInstance = h337.create(heatMapConfig);
-          var dataPoint = { x: 5, y: 5, value: 100 };
-          var dataPoint2 = { x: 6, y: 6, value: 200 };
-          var dataPoint3 = { x: 1, y: 2, value: 15 };
-          var dataPoints = [dataPoint, dataPoint2, dataPoint3];
-          heatMapInstance.addData(dataPoints);
+          var dataPoints = [];
+          for(var i=0;i<results.nccf[0].length;i++) {
+            for(var j=0;j<results.nccf[0][i].length;j++) {
+              if(results.nccf[0][i][j][0] != 0 && results.nccf[0][i][j][1] != 0) {
+                var x = i + 1;
+                var y = results.nccf[0][i][j][0];
+                var z = results.nccf[0][i][j][1]; 
+                var newDataPoint = { x: x, y: y, z: z};
+                dataPoints.push(newDataPoint);
+              }
+            }
+          }
 
-          var nccfJsonString = JSON.stringify(results.nccf, undefined, 4);
+          var nccfJsonString = JSON.stringify(dataPoints, undefined, 4);
+          //var nccfJsonString = JSON.stringify(results.nccf, undefined, 4);
           $('#nccf_output').val('');
           $('#nccf_output').val(nccfJsonString);
+          
+          heatMapInstance.addData(dataPoints);
         }
       }
     });
