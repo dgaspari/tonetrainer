@@ -116,6 +116,16 @@ var TestView = Backbone.View.extend({
         $('.exampleChart').show();
 
         if(results.nccf) {
+          //populate heat map:
+          var heatContainer = document.getElementById('nccf_map');
+          var heatMapConfig = { container: heatContainer, radius: 10, maxOpacity: .5, minOpacity: 0, blue: .75 };
+          var heatMapInstance = h337.create(heatMapConfig);
+          var dataPoint = { x: 5, y: 5, value: 100 };
+          var dataPoint2 = { x: 6, y: 6, value: 200 };
+          var dataPoint3 = { x: 1, y: 2, value: 15 };
+          var dataPoints = [dataPoint, dataPoint2, dataPoint3];
+          heatMapInstance.addData(dataPoints);
+
           var nccfJsonString = JSON.stringify(results.nccf, undefined, 4);
           $('#nccf_output').val('');
           $('#nccf_output').val(nccfJsonString);
