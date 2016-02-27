@@ -136,18 +136,21 @@ var TestView = Backbone.View.extend({
           var zPoints = [];
           for(var i=0;i<results.nccf[0].length;i++) {
             xPoints.push(i);
-            for(var j=0;j<results.nccf[0][i].length;j++) {
-              if(results.nccf[0][i][j][0] != 0 && results.nccf[0][i][j][1] != 0) {
-                var x = i;
-                var y = results.nccf[0][i][j][0];
-                var z = results.nccf[0][i][j][1]; 
+            var newZPoints = [];
+            for(var k=88;k<883;k++) {
+              var x = i;
+              var y = k;
+              yPoints.push(y);
+              var z = 0.0;    
+              if(results.nccf[0][i][0][0] != 0 && results.nccf[0][i][0][1] != 0 && results.nccf[0][i][0][0] === k) {
+                z = results.nccf[0][i][0][1]; 
                 var newDataPoint = { x: x, y: y, z: z};
                 dataPoints.push(newDataPoint);
-
-                yPoints.push(y);
-                zPoints.push(z);
+                results.nccf[0][i].shift();
               }
+              newZPoints.push(z);
             }
+            zPoints.push(newZPoints);
           }
 
           var nccfJsonString = JSON.stringify(dataPoints, undefined, 4);
