@@ -116,56 +116,37 @@ var TestView = Backbone.View.extend({
         $('.exampleChart').show();
 
         if(results.nccf) {
-          //populate heat map:
-          var heatContainer = document.getElementById('nccf_map');
-          var heatMapConfig = { 
-            container: heatContainer, 
-            backgroundColor: 'rgba(0,0,0,.95)', 
-            maxOpacity: .9, 
-            minOpacity: .3,
-            gradient: {
-              '.5': 'blue',
-              '.8': 'red',
-              '.95': 'white'
-            }
-          };
-          // var heatMapInstance = h337.create(heatMapConfig);
           var dataPoints = [];
-          var xPoints = [];
-          var yPoints = [];
           var zPoints = [];
+          for(var a=0;a<900;a++) {
+            var zPointsForFreq = [];
+            for(var b=0;b<results.nccf[0].length;b++) {
+              zPointsForFreq.push(0.0);
+            }
+            zPoints.push(zPointsForFreq);
+          }
           for(var i=0;i<results.nccf[0].length;i++) {
-            xPoints.push(i);
-            var newZPoints = [];
-            for(var k=88;k<883;k++) {
+            for(var j=0;j<results.nccf[0][i].length;j++) {
               var x = i;
-              var y = k;
-              yPoints.push(y);
-              var z = 0.0;    
-              if(results.nccf[0][i][0][0] != 0 && results.nccf[0][i][0][1] != 0 && results.nccf[0][i][0][0] === k) {
-                z = results.nccf[0][i][0][1]; 
+              var y = results.nccf[0][i][j][0];
+              var z = results.nccf[0][i][j][1];
+              if(y !== 0 && z !== 0) {
                 var newDataPoint = { x: x, y: y, z: z};
                 dataPoints.push(newDataPoint);
-                results.nccf[0][i].shift();
+                zPoints[y][x] = z;
               }
-              newZPoints.push(z);
             }
-            zPoints.push(newZPoints);
           }
-
+          //Post processed nccf output to textarea
           var nccfJsonString = JSON.stringify(dataPoints, undefined, 4);
-          //var nccfJsonString = JSON.stringify(results.nccf, undefined, 4);
           $('#nccf_output').val('');
           $('#nccf_output').val(nccfJsonString);
+          //Display heatmap of NCCF results
           var data = [{
             z: zPoints,
-            y: yPoints,
-            x: xPoints,
             type: 'heatmap'
           }];
           Plotly.newPlot('nccf_map', data);
-
-          //heatMapInstance.addData(dataPoints);
         }
       }
     });
