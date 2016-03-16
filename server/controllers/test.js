@@ -13,7 +13,7 @@ var fs = require('fs');
 var getAllExamples = function(req, res) {
   var db = new sqlite3.Database('database/tonetrainer.db');
   db.serialize(function() {
-    db.all('SELECT s.SpeakerId, s.Name, e.ExampleId, e.MandarinWord, e.PinyinWord FROM Examples e JOIN Speakers s ON s.SpeakerId = e.SpeakerId;', function(err, rows) {
+    db.all('SELECT s.SpeakerId, s.Name, e.ExampleId, e.MandarinWord, e.PinyinWord FROM Examples e JOIN Speakers s ON s.SpeakerId = e.SpeakerId ORDER BY s.SpeakerId;', function(err, rows) {
       res.json(rows);
       db.close();
     });
