@@ -172,6 +172,10 @@ var MainAppView = Backbone.View.extend({
     console.log('passing blob to python module...');
     var uploadData = new FormData();
     uploadData.append('audiodata', blobdata);
+
+    //show loading screen before sending out ajax call
+    $('.loading-screen').show();
+
     $.ajax({
       url: 'test/sendfreq',
       type: 'POST',
@@ -190,6 +194,9 @@ var MainAppView = Backbone.View.extend({
             ]
           }
         });
+      },
+      complete: function(status) {
+        $('.loading-screen').hide();
       }
     });
   },
