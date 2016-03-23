@@ -85,10 +85,14 @@
     width: 100%;
     height: 100%;
     text-align: center;
-    padding-top: 180px;
     z-index: 9999;
     background: #7f7f7f;
     background: rgba(0,0,0,0.2);
+}
+
+.loading-spinner {
+    background: url('/images/ring-alt.gif') no-repeat center center;
+    padding-top: 800px;
 }
 
 // --- Recorder
